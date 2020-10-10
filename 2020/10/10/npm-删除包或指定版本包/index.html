@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="webpack," />
+  <meta name="keywords" content="npm," />
 
 
 
@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Babel  babel&#x2F;core、Polyfill、babel&#x2F;plugin-transform-runtime">
+<meta name="description" content="如何在 NPM 上删除删除包或指定版本包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="webpack之babel">
-<meta property="og:url" content="http://yoursite.com/2020/07/01/webpack%E4%B9%8Bbabel/index.html">
+<meta property="og:title" content="npm-删除包或指定版本包">
+<meta property="og:url" content="http://yoursite.com/2020/10/10/npm-%E5%88%A0%E9%99%A4%E5%8C%85%E6%88%96%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E5%8C%85/index.html">
 <meta property="og:site_name" content="Lzxc&#39;s Blog">
-<meta property="og:description" content="Babel  babel&#x2F;core、Polyfill、babel&#x2F;plugin-transform-runtime">
-<meta property="og:image" content="https://babel.docschina.org/img/babel-black.svg">
-<meta property="article:published_time" content="2020-07-01T09:11:19.000Z">
-<meta property="article:modified_time" content="2020-07-18T18:15:33.869Z">
+<meta property="og:description" content="如何在 NPM 上删除删除包或指定版本包">
+<meta property="og:image" content="http://yoursite.com/images/npm/npm1.png">
+<meta property="article:published_time" content="2020-10-10T08:31:09.000Z">
+<meta property="article:modified_time" content="2020-10-10T13:23:51.389Z">
 <meta property="article:author" content="Lzxc">
-<meta property="article:tag" content="webpack">
+<meta property="article:tag" content="npm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://babel.docschina.org/img/babel-black.svg">
+<meta name="twitter:image" content="http://yoursite.com/images/npm/npm1.png">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/07/01/webpack之babel/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/10/10/npm-删除包或指定版本包/"/>
 
 
 
 
 
-  <title>webpack之babel | Lzxc's Blog</title>
+  <title>npm-删除包或指定版本包 | Lzxc's Blog</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/webpack%E4%B9%8Bbabel/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/10/npm-%E5%88%A0%E9%99%A4%E5%8C%85%E6%88%96%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lzxc">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">webpack之babel</h1>
+          <h1 class="post-title" itemprop="name headline">npm-删除包或指定版本包</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T17:11:19+08:00">
-                2020-07-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-10T16:31:09+08:00">
+                2020-10-10
               </time>
             
 
@@ -359,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -376,7 +376,7 @@
 
           
           
-             <span id="/2020/07/01/webpack%E4%B9%8Bbabel/" class="leancloud_visitors" data-flag-title="webpack之babel">
+             <span id="/2020/10/10/npm-%E5%88%A0%E9%99%A4%E5%8C%85%E6%88%96%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E5%8C%85/" class="leancloud_visitors" data-flag-title="npm-删除包或指定版本包">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.6k
+                  91
                 </span>
               
 
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11
+                  1
                 </span>
               
             </div>
@@ -438,125 +438,21 @@
       
 
       
-        <h2 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h2><p><img src="https://babel.docschina.org/img/babel-black.svg" alt="avatar"></p>
+        <p><img src="/images/npm/npm1.png" alt="avatar"></p>
 <blockquote>
-<p><code>babel/core</code>、<code>Polyfill</code>、<code>babel/plugin-transform-runtime</code></p>
+<p>如何在 <strong>NPM</strong> 上删除删除包或指定版本包</p>
 </blockquote>
 <a id="more"></a>
-<p>Babel 能够做的事情：</p>
-<ul>
-<li>语法转换</li>
-<li>通过 Polyfill 方式在目标环境中添加缺失的特性(@babel/polyfill 模块)</li>
-<li>源码转换(codemods)</li>
-</ul>
-<h2 id="核心-babel-core"><a href="#核心-babel-core" class="headerlink" title="核心 @babel/core"></a>核心 @babel/core</h2><p><strong>Babel</strong> 的核心功能包含在 <strong>@babel/core</strong> 模块中。不安装 <strong>@babel/core</strong>，无法使用 <strong>babel</strong> 进行编译。</p>
-<h1 id="Polyfill"><a href="#Polyfill" class="headerlink" title="Polyfill"></a>Polyfill</h1><p><strong>@babel/polyfill</strong> 模块包括 <strong>core-js</strong> 和一个自定义的 <strong>regenerator runtime</strong> 模块，可以模拟完整的 <strong>ES2015+</strong> 环境（不包含第4阶段前的提议）。 使我们能使用类似 <strong>Promise</strong> 和 <strong>WeakMap</strong> 构造函数、<strong>Array.form</strong> 或 <strong>Object.assign</strong> 的静态方法、<strong>Array.prototype.includes</strong> 之类的实例方法以及生成器函数(前提是使用了 <strong>@babel/plugin-transform-regenerator</strong> 插件)。为了添加这些功能，<strong>polyfill</strong> 将添加到全局范围和类似 String 这样的内置原型中。但会对全局环境造成污染。</p>
-<p>首先，安装 <strong>@babel/polyfill</strong> 依赖:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save @babel&#x2F;polyfill</span><br></pre></td></tr></table></figure>
 
-<p>我们需要将完整的 <strong>polyfill</strong> 在代码之前加载，修改我们的 <strong>src/index.js</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import &#39;@babel&#x2F;polyfill&#39;;</span><br><span class="line"></span><br><span class="line">const isHas &#x3D; [1,2,3].includes(2);</span><br><span class="line"></span><br><span class="line">const p &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    resolve(100);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p> <strong>webpack</strong> 中进行配置</p>
-<p>例如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">entry: [</span><br><span class="line">    require.resolve(&#39;.&#x2F;polyfills&#39;),</span><br><span class="line">    path.resolve(&#39;.&#x2F;index&#39;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p><strong>polyfills.js</strong> 文件内容如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;当然，还可能有一些其它的 polyfill，例如 stage 4之前的一些 polyfill</span><br><span class="line">import &#39;@babel&#x2F;polyfill&#39;;</span><br></pre></td></tr></table></figure>
-
+<h1 id="删除指定版本的包"><a href="#删除指定版本的包" class="headerlink" title="删除指定版本的包"></a>删除指定版本的包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish xxx@xxx</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>如果完整的引入 <strong>@babel/polyfill</strong> 会导致我们最终构建出的包的体积增大</p>
-<p><strong>@babel/polyfill</strong>的包大小为89K (当前 <strong>@babel/polyfill</strong> 版本为 7.7.0)。</p>
+<p>删除后只能发布大于该删除包的版本号</p>
 </blockquote>
-<p><strong>@babel/preset-env</strong> 提供了一个 <strong>useBuiltIns</strong> 参数，设置值为 <strong>usage</strong> 时，就只会包含代码需要的 polyfill 。有一点需要注意：配置此参数的值为 <strong>usage</strong> ，必须要同时设置 <strong>corejs</strong> (如果不设置，会给出警告，默认使用的是<strong>“corejs”: 2</strong>) ，注意: 这里仍然需要安装 <strong>@babel/polyfill</strong>(当前 <strong>@babel/polyfill</strong> 版本默认会安装 <strong>“corejs”: 2</strong>):</p>
-<p>首先说一下使用 <strong>core-js@3</strong> 的原因，<strong>core-js@2</strong> 分支中已经不会再添加新特性，新特性都会添加到 <strong>core-js@3</strong>。例如你使用了 Array.prototype.flat()，如果你使用的是 <strong>core-js@2</strong>，那么其不包含此新特性。为了可以使用更多的新特性，建议大家使用 <strong>core-js@3</strong>。</p>
-<p>安装依赖依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save core-js@3</span><br></pre></td></tr></table></figure>
-
-<p>现在，修改 <strong>Babel</strong> 的配置文件如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;.babelrcconst presets &#x3D; [    </span><br><span class="line">    [        </span><br><span class="line">        &quot;@babel&#x2F;env&quot;,        </span><br><span class="line">        &#123;               </span><br><span class="line">            &quot;useBuiltIns&quot;: &quot;usage&quot;,</span><br><span class="line">            &quot;corejs&quot;: 3</span><br><span class="line">        &#125;    </span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Babel</strong> 会检查所有代码，以便查找在目标环境中缺失的功能，然后仅仅把需要的 <strong>polyfill</strong> 包含进来。</p>
-<p>例如，src/index.js 代码不变：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const isHas &#x3D; [1,2,3].includes(2);</span><br><span class="line"></span><br><span class="line">const p &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    resolve(100);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>我们看看编译出来的文件 <strong>(lib/index)</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">require(&quot;core-js&#x2F;modules&#x2F;es.array.includes&quot;);</span><br><span class="line"></span><br><span class="line">require(&quot;core-js&#x2F;modules&#x2F;es.object.to-string&quot;);</span><br><span class="line"></span><br><span class="line">require(&quot;core-js&#x2F;modules&#x2F;es.promise&quot;);</span><br><span class="line"></span><br><span class="line">var isHas &#x3D; [1, 2, 3].includes(2);</span><br><span class="line"></span><br><span class="line">var p &#x3D; new Promise(function (resolve, reject) &#123;</span><br><span class="line">    resolve(100);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>同样的代码，我们用 webpack 构建一下(production 模式)，能看到最终的代码大小仅为: 20KB。而如果我们引入整个 <strong>@babel/polyfill</strong> 的话，构建出的包大小为：89KB</p>
-<p>前面曾提到，在 <strong>useBuiltIns</strong> 参数值为 usage 时，仍然需要安装 <strong>@babel/polyfill</strong>，虽然我们上面的代码转换中看起来并没有使用到，但是，如果我们源码中使用到了 async/await，那么编译出来的代码需要 require(<strong>“regenerator-runtime/runtime”</strong>)，在 <strong>@babel/polyfill</strong> 的依赖中，当然啦，你也可以只安装 regenerator-runtime/runtime 取代安装 <strong>@babel/polyfill</strong>。</p>
-<p>下面我要说的内容，也许你已经知道，也许你还不知道，这都不重要，但是此刻起，你要知道了: <strong>Babel</strong> 会使用很小的辅助函数来实现类似 <strong>_createClass</strong> 等公共方法。默认情况下，它将被添加(<strong>inject</strong>)到需要它的每个文件中。</p>
-<p>假如，我们的 src/index.js 是这样的:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123;</span><br><span class="line">    constructor(x, y) &#123;</span><br><span class="line">        this.x &#x3D; x;</span><br><span class="line">        this.y &#x3D; y;</span><br><span class="line">    &#125;;</span><br><span class="line">    getX() &#123;</span><br><span class="line">        return this.x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let cp &#x3D; new ColorPoint(25, 8);</span><br></pre></td></tr></table></figure>
-
-<p>编译出来的 <strong>lib/index.js</strong>，如下所示:`</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">require(&quot;core-js&#x2F;modules&#x2F;es.object.define-property&quot;);</span><br><span class="line"></span><br><span class="line">function _classCallCheck(instance, Constructor) &#123; </span><br><span class="line">    if (!(instance instanceof Constructor)) &#123; </span><br><span class="line">    throw new TypeError(&quot;Cannot call a class as a function&quot;); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function _defineProperties(target, props) &#123; for (var i &#x3D; 0; i &lt; props.length; i++) &#123; var descriptor &#x3D; props[i]; descriptor.enumerable &#x3D; descriptor.enumerable || false; descriptor.configurable &#x3D; true; if (&quot;value&quot; in descriptor) descriptor.writable &#x3D; true; Object.defineProperty(target, descriptor.key, descriptor); &#125; &#125;</span><br><span class="line"></span><br><span class="line">function _createClass(Constructor, protoProps, staticProps) &#123; if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; &#125;</span><br><span class="line"></span><br><span class="line">var Point &#x3D;</span><br><span class="line">&#x2F;*#__PURE__*&#x2F;</span><br><span class="line">function () &#123;</span><br><span class="line">    function Point(x, y) &#123;</span><br><span class="line">        _classCallCheck(this, Point);</span><br><span class="line">            this.x &#x3D; x;</span><br><span class="line">            this.y &#x3D; y;</span><br><span class="line">        &#125;</span><br><span class="line">        _createClass(Point, [</span><br><span class="line">                &#123;</span><br><span class="line">                    key: &quot;getX&quot;,</span><br><span class="line">                    value: function getX() &#123;</span><br><span class="line">                        return this.x;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        );</span><br><span class="line">        return Point;</span><br><span class="line">    &#125;();</span><br><span class="line">var cp &#x3D; new ColorPoint(25, 8);</span><br></pre></td></tr></table></figure>
-
-<p>看起来，似乎并没有什么问题，但是你想一下，如果你有10个文件中都使用了这个 class，是不是意味着 <strong>_classCallCheck</strong>、<strong>_defineProperties</strong>、<strong>_createClass</strong> 这些方法被 <strong>inject</strong> 了10次。这显然会导致包体积增大，最关键的是，我们并不需要它 <strong>inject</strong> 多次。</p>
-<p>这个时候，就是 <strong>@babel/plugin-transform-runtime</strong> 插件大显身手的时候了，使用 <strong>@babel/plugin-transform-runtime</strong> 插件，所有帮助程序都将引用模块 <strong>@babel/runtime</strong>，这样就可以避免编译后的代码中出现重复的帮助程序，有效减少包体积。</p>
-<h1 id="babel-plugin-transform-runtime"><a href="#babel-plugin-transform-runtime" class="headerlink" title="@babel/plugin-transform-runtime"></a>@babel/plugin-transform-runtime</h1><p><strong>@babel/plugin-transform-runtime</strong> 是一个可以重复使用 Babel 注入的帮助程序，以节省代码大小的插件。</p>
-<p>另外，<strong>@babel/plugin-transform-runtime</strong> 需要和 <strong>@babel/runtime</strong> 配合使用。</p>
-<p>首先安装依赖，<strong>@babel/plugin-transform-runtime</strong> 通常仅在开发时使用，但是运行时最终代码需要依赖 <strong>@babel/runtime</strong>，所以 <strong>@babel/runtime</strong> 必须要作为生产依赖被安装，如下 :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev @babel&#x2F;plugin-transform-runtime</span><br><span class="line">npm install --save @babel&#x2F;runtime</span><br></pre></td></tr></table></figure>
-
-<p>除了前文所说的，<strong>@babel/plugin-transform-runtime</strong> 可以减少编译后代码的体积外，我们使用它还有一个好处，它可以为代码创建一个沙盒环境，如果使用 <strong>@babel/polyfill</strong> 及其提供的内置程序（例如 Promise ，Set 和 Map ），则它们将污染全局范围。虽然这对于应用程序或命令行工具可能是可以的，但是如果你的代码是要发布供他人使用的库，或者无法完全控制代码运行的环境，则将成为一个问题。<br><strong>@babel/plugin-transform-runtime</strong> 会将这些内置别名作为 <strong>core-js</strong> 的别名，因此您可以无缝使用它们，而无需 <strong>polyfill</strong>。<br>修改 <strong>.babelrc</strong> 的配置，如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;.babelrc</span><br><span class="line">&#123;    </span><br><span class="line">    &quot;presets&quot;: </span><br><span class="line">    [</span><br><span class="line">        [</span><br><span class="line">            &quot;@babel&#x2F;preset-env&quot;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;useBuiltIns&quot;: &quot;usage&quot;,</span><br><span class="line">                &quot;corejs&quot;: 3</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    ],</span><br><span class="line">    &quot;plugins&quot;: [        </span><br><span class="line">        [            </span><br><span class="line">        &quot;@babel&#x2F;plugin-transform-runtime&quot;        </span><br><span class="line">        ]    </span><br><span class="line">    ]&#125;</span><br></pre></td></tr></table></figure>
-<p>重新编译 <strong>npm run compiler</strong> , 现在，编译出来的内容为(<strong>lib/index.js</strong>):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line">var _interopRequireDefault &#x3D; require(&quot;@babel&#x2F;runtime&#x2F;helpers&#x2F;interopRequireDefault&quot;);</span><br><span class="line"></span><br><span class="line">var _classCallCheck2 &#x3D; _interopRequireDefault(require(&quot;@babel&#x2F;runtime&#x2F;helpers&#x2F;classCallCheck&quot;));</span><br><span class="line"></span><br><span class="line">var _createClass2 &#x3D; _interopRequireDefault(require(&quot;@babel&#x2F;runtime&#x2F;helpers&#x2F;createClass&quot;));</span><br><span class="line">var Point &#x3D;</span><br><span class="line">&#x2F;*#__PURE__*&#x2F;</span><br><span class="line">function () &#123;</span><br><span class="line">    function Point(x, y) &#123;</span><br><span class="line">        (0, _classCallCheck2.default)(this, Point);</span><br><span class="line">                    this.x &#x3D; x;</span><br><span class="line">                    this.y &#x3D; y;</span><br><span class="line">                &#125;</span><br><span class="line">        (0, _createClass2.default)(Point, [&#123;</span><br><span class="line">            key: &quot;getX&quot;,</span><br><span class="line">            value: function getX() &#123;</span><br><span class="line">                return this.x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;]);</span><br><span class="line">        return Point;</span><br><span class="line">    &#125;();</span><br><span class="line">    var cp &#x3D; new ColorPoint(25, 8);</span><br></pre></td></tr></table></figure>
-
-<p>可以看出，帮助函数现在不是直接被 <strong>inject</strong> 到代码中，而是从 <strong>@babel/runtime</strong> 中引入。前文说了使用 <strong>@babel/plugin-transform-runtime</strong> 可以避免全局污染，我们来看看是如何避免污染的。</p>
-<p>修改 <strong>src/index.js</strong> 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let isHas &#x3D; [1,2,3].includes(2);</span><br><span class="line"></span><br><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    resolve(100);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>编译出来的代码如下(<strong>lib/index.js</strong>):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line">require(&quot;core-js&#x2F;modules&#x2F;es.array.includes&quot;);</span><br><span class="line">require(&quot;core-js&#x2F;modules&#x2F;es.object.to-string&quot;);</span><br><span class="line">require(&quot;core-js&#x2F;modules&#x2F;es.promise&quot;);</span><br><span class="line">var isHas &#x3D; [1, 2, 3].includes(2);</span><br><span class="line">new Promise(function (resolve, reject) &#123;    </span><br><span class="line">    resolve(100);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p><strong>Array.prototype</strong> 上新增了 <strong>includes</strong> 方法，并且新增了全局的 Promise 方法，污染了全局环境，这跟不使用 <strong>@babel/plugin-transform-runtime</strong> 没有区别嘛。</p>
-<p>如果我们希望 <strong>@babel/plugin-transform-runtime</strong> 不仅仅处理帮助函数，同时也能加载 <strong>polyfill</strong> 的话，我们需要给 <strong>@babel/plugin-transform-runtime</strong> 增加配置信息。</p>
-<p>首先新增依赖 <strong>@babel/runtime-corejs3</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @babel&#x2F;runtime-corejs3 --save</span><br></pre></td></tr></table></figure>
-
-<p>修改配置文件如下(移除了 <strong>@babel/preset-env</strong> 的 <strong>useBuiltIns</strong> 的配置，不然不就重复了嘛嘛嘛，不信的话，你用 async/await 编译下试试咯):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;    </span><br><span class="line">    &quot;presets&quot;: [        </span><br><span class="line">        [            </span><br><span class="line">        &quot;@babel&#x2F;preset-env&quot;        </span><br><span class="line">        ]    </span><br><span class="line">    ],    </span><br><span class="line">    &quot;plugins&quot;: [        </span><br><span class="line">        [            </span><br><span class="line">            &quot;@babel&#x2F;plugin-transform-runtime&quot;,</span><br><span class="line">            &#123;                </span><br><span class="line">                &quot;corejs&quot;: 3            </span><br><span class="line">            &#125;        </span><br><span class="line">        ]    </span><br><span class="line">    ]&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后重新编译，看一下，编译出来的结果(<strong>lib/index.js</strong>):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line">var _interopRequireDefault &#x3D; require(&quot;@babel&#x2F;runtime-corejs3&#x2F;helpers&#x2F;interopRequireDefault&quot;);</span><br><span class="line"></span><br><span class="line">var _promise &#x3D; _interopRequireDefault(require(&quot;@babel&#x2F;runtime-corejs3&#x2F;core-js-stable&#x2F;promise&quot;));</span><br><span class="line"></span><br><span class="line">var _includes &#x3D; _interopRequireDefault(require(&quot;@babel&#x2F;runtime-corejs3&#x2F;core-js-stable&#x2F;instance&#x2F;includes&quot;));</span><br><span class="line"></span><br><span class="line">var _context;</span><br><span class="line"></span><br><span class="line">var isHas &#x3D; (0, _includes.default)(_context &#x3D; [1, 2, 3]).call(_context, 2);</span><br><span class="line"></span><br><span class="line">new _promise.default(function (resolve, reject) &#123;  </span><br><span class="line">    resolve(100);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>可以看出，没有直接去修改 <strong>Array.prototype</strong>，或者是新增 Promise 方法，避免了全局污染。如果上面 <strong>@babel/plugin-transform-runtime</strong> 配置的 <strong>core-js</strong> 是 “2”，其中不包含实例的 <strong>polyfill</strong> 需要单独引入。</p>
+<h1 id="删除包"><a href="#删除包" class="headerlink" title="删除包"></a>删除包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish xxx</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>划重点：如果我们配置的 <strong>corejs</strong> 是 3 版本，那么不管是实例方法还是全局方法，都不会再污染全局环境。</p>
+<p>删除后不能发布同名的包</p>
 </blockquote>
-<p>看到这里，不知道大家有没有这样一个疑问？给 <strong>@babel/plugin-transform-runtime</strong> 配置 <strong>corejs</strong> 是如此的完美，既可以将帮助函数变成引用的形式，又可以动态引入 <strong>polyfill</strong>，并且不会污染全局环境。何必要给 <strong>@babel/preset-env</strong> 提供 <strong>useBuiltIns</strong> 功能呢，看起来似乎不需要呀。</p>
-<p>带着这样的疑问，我新建了几个文件(内容简单且基本一致，使用了些新特性)，然后使用 <strong>webpack</strong> 构建，以下是我对比的数据:</p>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th align="center">.babelrc 配置</th>
-<th align="right">webpack mode production</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0</td>
-<td align="center">不使用 <strong>@babel/plugin-transform-runtime</strong></td>
-<td align="right">36KB</td>
-</tr>
-<tr>
-<td>1</td>
-<td align="center">使用 <strong>@babel/plugin-transform-runtime</strong> ，并配置参数 <strong>corejs: 3</strong>。不会污染全局环境</td>
-<td align="right">37KB</td>
-</tr>
-<tr>
-<td>2</td>
-<td align="center">使用 <strong>@babel/plugin-transform-runtime</strong> ，不配置 <strong>corejs</strong></td>
-<td align="right">22KB</td>
-</tr>
-</tbody></table>
-<p>我猜测是 <strong>@babel/runtime-corejs3/XXX</strong> 的包本身比 *<em>core-js/modules/XXX *</em>要大一些</p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p><strong>@babel/plugin-transform-runtime</strong></p>
-<p><strong>@babel/polyfill</strong></p>
-<p>合理配置Babel配置，使用对应polyfill达到优化的目的</p>
-<p>参考 帖子：<a href="https://juejin.im/post/5ddff3abe51d4502d56bd143#heading-7" target="_blank">刘小夕-不容错过的 Babel7 知识</a></p>
+<p>#tips:<br><code>npm unpublish</code> 只能在发布后24h内有效，如果超过就需要找npm客服取消发布了</p>
 
       
     </div>
@@ -574,7 +470,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/webpack/" rel="tag"># webpack</a>
+            <a href="/tags/npm/" rel="tag"># npm</a>
           
         </div>
       
@@ -587,14 +483,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/10/10/npm-%E5%8F%91%E5%B8%83%E6%95%99%E7%A8%8B/" rel="next" title="npm-发布教程">
+                <i class="fa fa-chevron-left"></i> npm-发布教程
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/01/webpack%E4%B9%8B%E4%BC%98%E5%8C%96%E7%AF%87/" rel="prev" title="webpack之优化篇">
-                webpack之优化篇 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/10/10/npm-%E4%BD%BF%E7%94%A8npm%20link/" rel="prev" title="npm-使用npm link">
+                npm-使用npm link <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -762,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Babel"><span class="nav-number">1.</span> <span class="nav-text">Babel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心-babel-core"><span class="nav-number">2.</span> <span class="nav-text">核心 @babel&#x2F;core</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polyfill"><span class="nav-number"></span> <span class="nav-text">Polyfill</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#babel-plugin-transform-runtime"><span class="nav-number"></span> <span class="nav-text">@babel&#x2F;plugin-transform-runtime</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number"></span> <span class="nav-text">结语</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#删除指定版本的包"><span class="nav-number">1.</span> <span class="nav-text">删除指定版本的包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除包"><span class="nav-number">2.</span> <span class="nav-text">删除包</span></a></li></ol></div>
             
 
           </div>
