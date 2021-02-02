@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar1.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar1.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="webpack splitChunks代码切割与提取前文写过webpack的优化配置，本文细说其中的splitChunks配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack之代码切割提取">
+<meta property="og:url" content="http://yoursite.com/2020/10/16/webpack%E4%B9%8B%E4%BB%A3%E7%A0%81%E5%88%87%E5%89%B2%E6%8F%90%E5%8F%96/index.html">
+<meta property="og:site_name" content="Lzxc&#39;s Blog">
+<meta property="og:description" content="webpack splitChunks代码切割与提取前文写过webpack的优化配置，本文细说其中的splitChunks配置">
+<meta property="og:image" content="http://yoursite.com/images/webpack/webpack-optimize.png">
+<meta property="og:image" content="http://yoursite.com/images/webpack/chunks.png">
+<meta property="article:published_time" content="2020-10-16T07:17:44.000Z">
+<meta property="article:modified_time" content="2020-11-02T07:16:21.852Z">
+<meta property="article:author" content="Lzxc">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/webpack/webpack-optimize.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/10/16/webpack之代码切割提取/"/>
+
+
+
+
+
+  <title>webpack之代码切割提取 | Lzxc's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-168993753-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lzxc's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/16/webpack%E4%B9%8B%E4%BB%A3%E7%A0%81%E5%88%87%E5%89%B2%E6%8F%90%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lzxc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lzxc's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack之代码切割提取</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-16T15:17:44+08:00">
+                2020-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/10/16/webpack%E4%B9%8B%E4%BB%A3%E7%A0%81%E5%88%87%E5%89%B2%E6%8F%90%E5%8F%96/" class="leancloud_visitors" data-flag-title="webpack之代码切割提取">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/webpack/webpack-optimize.png" alt="avatar"></p>
+<blockquote>
+<p><code>webpack</code> splitChunks代码切割与提取<br>前文写过<code>webpack</code>的优化配置，本文细说其中的<code>splitChunks</code>配置</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="chunks，module，bundle"><a href="#chunks，module，bundle" class="headerlink" title="chunks，module，bundle"></a>chunks，module，bundle</h2><p>module：在js中，每一个导入导出的<code>模块</code>，称为<code>module</code>，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">module.export &#x3D; &#123;&#125;</span><br><span class="line">export default &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>引入的文件或库，插件等</p>
+<p>chunks：指<code>webpack</code>中的配置<code>splitChunks.chunks</code>，打包出来的入口文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">splitChunks: &#123;</span><br><span class="line">    chunks: &#39;all&#39;,</span><br><span class="line">    cacheGroups: &#123;</span><br><span class="line">        ****</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>bundle：由<code>webpack</code>最终拆分出来的每一个包，如<br><img src="/images/webpack/chunks.png" alt="chunks"></p>
+<h2 id="为什么需要拆分包"><a href="#为什么需要拆分包" class="headerlink" title="为什么需要拆分包"></a>为什么需要拆分包</h2><p>原因在于，随着项目开发后期时可能会引入第三方包，或者本地业务代码，工具库越来越大，首屏加载速度或某页面加载速度缓慢，单个文件可能达到几M甚至几十M的可能</p>
+<h2 id="如何配置"><a href="#如何配置" class="headerlink" title="如何配置"></a>如何配置</h2><p>首先说下<code>splitChunks</code>下有哪些配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">optimization:&#123;</span><br><span class="line">    splitChunks:&#123;</span><br><span class="line">        usedExports: &#39;&#39;, &#x2F;&#x2F; 找出模块使用哪些导出来处理导出名称，忽略未使用的导出并生成更有效的代码。如果是true：分析每个运行时使用的导出，则是&quot;global&quot;：全局分析所有运行时的导出合并。</span><br><span class="line">        chunks: &#39;&#39;, &#x2F;&#x2F; &#39;all&#39;,&#39;async&#39;,&#39;initial&#39;,  &#39;all&#39;:异步与非异步都进入该选项匹配中，&#39;async&#39;:只有异步模块进入，&#39;initial&#39;:初始化时就能获取的模块</span><br><span class="line">        minSize: &#39;&#39;, &#x2F;&#x2F; 生成块的最小大小(以字节为单位)</span><br><span class="line">        minRemainingSize: &#39;&#39;, &#x2F;&#x2F; 在webpack 5中引入了option选项，通过确保拆分后剩余的最小块大小超过限制来避免大小为零的模块。默认为0，平时少用到</span><br><span class="line">        maxSize: &#39;&#39;, &#x2F;&#x2F; 最大模块拆分大小</span><br><span class="line">        minChunks: &#39;&#39;, &#x2F;&#x2F; entry引用的次数最小值才会被抽离出去</span><br><span class="line">        maxAsyncRequests: &#39;&#39;, &#x2F;&#x2F; 按需加载时最大并行请求数</span><br><span class="line">        maxInitialRequests: &#39;&#39;, &#x2F;&#x2F; 入口点的最大并行请求数</span><br><span class="line">        automaticNameDelimiter: &#39;&#39;, &#x2F;&#x2F; 默认情况下，webpack将使用块的来源和名称生成名称（例如vendors~main.js）。此选项使您可以指定用于生成名称的定界符。</span><br><span class="line">        enforceSizeThreshold: &#39;&#39;, &#x2F;&#x2F; 强制执行拆分的大小阈值和其他限制（minRemainingSize，maxAsyncRequests，maxInitialRequests）将被忽略。</span><br><span class="line">        &#x2F;&#x2F; 核心配置，对代码的拆分规则全在cacheGroups缓存组里配置，缓存组的每一个属性都是一个配置规则，我这里给他的default属性进行了配置，属性名可以不叫default可以自己定。属性的值是一个对象，里面放的我们对一个代码拆分规则的描述。</span><br><span class="line">        cacheGroups: [</span><br><span class="line">            &#123;</span><br><span class="line">                name: &#39;&#39;, &#x2F;&#x2F; 提取出来的公共模块将会以这个来命名</span><br><span class="line">                chunks: &#39;&#39;, &#x2F;&#x2F; 指定哪些类型的chunk参与拆分，值可以是string可以是函数</span><br><span class="line">                priority: &#39;&#39;, &#x2F;&#x2F; cacheGroups中存在多个cache配置，该配置为当前规则的权重，越大匹配优先级越高</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>cacheGroups</code>外的配置为<code>splitChunks</code>的全局配置，每一个<code>cacheGroups</code>中配置都会使用外部的配置</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>假设项目文件夹为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">|--public&#x2F;</span><br><span class="line">|   |--index.html</span><br><span class="line">|--src&#x2F;</span><br><span class="line">|   |--a.js</span><br><span class="line">|   |--b.js</span><br><span class="line">|   |--c.js</span><br><span class="line">|   |--index.js</span><br><span class="line">|--package.json</span><br><span class="line">|--webpack.config.js</span><br></pre></td></tr></table></figure>
+<h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;index.js</span><br><span class="line">import a from &#39;.&#x2F;a.js&#39;;</span><br><span class="line">import b from &#39;.&#x2F;b.js&#39;;</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;index-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br></pre></td></tr></table></figure>
+<h3 id="a-js"><a href="#a-js" class="headerlink" title="a.js"></a>a.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;a.js</span><br><span class="line">require(&#39;.&#x2F;c.js&#39;);</span><br><span class="line">const $ &#x3D; require(&#39;jquery&#39;)</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;a-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
+<h3 id="b-js"><a href="#b-js" class="headerlink" title="b.js"></a>b.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;b.js</span><br><span class="line">require(&#39;.&#x2F;c.js&#39;);</span><br><span class="line">const $ &#x3D; require(&#39;jquery&#39;)</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;b-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
+<h3 id="c-js"><a href="#c-js" class="headerlink" title="c.js"></a>c.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;c.js</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;c-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; webpack.config.js</span><br><span class="line">const path &#x3D; require(&#39;path&#39;);</span><br><span class="line">const HtmlWebpackPlugin &#x3D; require(&#39;html-webpack-plugin&#39;);</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    entry: &#123;</span><br><span class="line">        index: &#39;.&#x2F;src&#x2F;index.js&#39;,</span><br><span class="line">    &#125;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, &#39;dist&#39;),</span><br><span class="line">        filename: &#39;[name].js&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: &#39;.&#x2F;public&#x2F;index.html&#39;,</span><br><span class="line">            filename: &#39;index.html&#39;</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="不配置任何splitChunks"><a href="#不配置任何splitChunks" class="headerlink" title="不配置任何splitChunks"></a>不配置任何splitChunks</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 58f075d584eee63560d0</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 229ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午3:49:40</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line">index.html  247 bytes          [emitted]</span><br><span class="line">  index.js    324 KiB   index  [emitted]  index</span><br><span class="line">Entrypoint index &#x3D; index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;index&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以看到index-js模块大小为324k，里面包含a-js，b-js，c-js，jquery"><a href="#可以看到index-js模块大小为324k，里面包含a-js，b-js，c-js，jquery" class="headerlink" title="可以看到index.js模块大小为324k，里面包含a.js，b.js，c.js，jquery"></a>可以看到<code>index.js</code>模块大小为324k，里面包含a.js，b.js，c.js，jquery</h4><h3 id="初步配置splitChunks"><a href="#初步配置splitChunks" class="headerlink" title="初步配置splitChunks"></a>初步配置splitChunks</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;webpack.config.js</span><br><span class="line"></span><br><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 5d698c9c939438c2aa3b</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 226ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午3:52:26</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js    320 KiB  common  [emitted]  common</span><br><span class="line">index.html  280 bytes          [emitted]</span><br><span class="line">  index.js   6.22 KiB   index  [emitted]  index</span><br><span class="line">Entrypoint index &#x3D; common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以看到多了common-js模块大小为320k，里面包含a-js，b-js，c-js，jquery"><a href="#可以看到多了common-js模块大小为320k，里面包含a-js，b-js，c-js，jquery" class="headerlink" title="可以看到多了common.js模块大小为320k，里面包含a.js，b.js，c.js，jquery"></a>可以看到多了<code>common.js</code>模块大小为320k，里面包含a.js，b.js，c.js，jquery</h4><h3 id="添加权重priority，并且抽离node-modules中的第三方包"><a href="#添加权重priority，并且抽离node-modules中的第三方包" class="headerlink" title="添加权重priority，并且抽离node_modules中的第三方包"></a>添加权重<code>priority</code>，并且抽离<code>node_modules</code>中的第三方包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        minSize: 30,</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -20</span><br><span class="line">            &#125;,</span><br><span class="line">            vendors: &#123;  &#x2F;&#x2F;拆分第三方库（通过npm|yarn安装的库）</span><br><span class="line">                test: &#x2F;[\\&#x2F;]node_modules[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;vendor&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -10</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="结果如下："><a href="#结果如下：" class="headerlink" title="结果如下："></a>结果如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 40141540a6afd27e4c34</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 237ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午4:00:24</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js   2.27 KiB  common  [emitted]  common</span><br><span class="line">index.html  313 bytes          [emitted]</span><br><span class="line">  index.js   6.23 KiB   index  [emitted]  index</span><br><span class="line"> vendor.js    318 KiB  vendor  [emitted]  vendor</span><br><span class="line">Entrypoint index &#x3D; vendor.js common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以看到多出vendor-js，大小318kb，而index-js大小减少到6-23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出"><a href="#可以看到多出vendor-js，大小318kb，而index-js大小减少到6-23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出" class="headerlink" title="可以看到多出vendor.js，大小318kb，而index.js大小减少到6.23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出"></a>可以看到多出<code>vendor.js</code>，大小318kb，而<code>index.js</code>大小减少到6.23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出</h4><h3 id="抽离指定文件"><a href="#抽离指定文件" class="headerlink" title="抽离指定文件"></a>抽离指定文件</h3><p>在<code>src/common</code>新增<code>utils.js</code>，并在<code>index.js</code>中引用他</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        minSize: 30,</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -20</span><br><span class="line">            &#125;,</span><br><span class="line">            vendors: &#123;  &#x2F;&#x2F;拆分第三方库（通过npm|yarn安装的库）</span><br><span class="line">                test: &#x2F;[\\&#x2F;]node_modules[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;vendor&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -10</span><br><span class="line">            &#125;,</span><br><span class="line">            utils:&#123;</span><br><span class="line">                test:&#x2F;[\\&#x2F;]src[\\&#x2F;]common[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;utils&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -9</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="结果如下：-1"><a href="#结果如下：-1" class="headerlink" title="结果如下："></a>结果如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: ec7341e5722a3d0efd5a</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 238ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午4:09:31</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js   2.31 KiB  common  [emitted]  common</span><br><span class="line">index.html  345 bytes          [emitted]</span><br><span class="line">  index.js   6.24 KiB   index  [emitted]  index</span><br><span class="line">  utils.js  387 bytes   utils  [emitted]  utils</span><br><span class="line"> vendor.js    318 KiB  vendor  [emitted]  vendor</span><br><span class="line">Entrypoint index &#x3D; utils.js vendor.js common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;common&#x2F;utils.js] 34 bytes &#123;utils&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 148 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以看到utils-js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包"><a href="#可以看到utils-js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包" class="headerlink" title="可以看到utils.js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包"></a>可以看到<code>utils.js</code>已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包</h4><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p><code>splitChunks</code>的抽离能节省许多重复代码的引入，加载。对项目大小与用户体验起到很大作用</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/10/npm-%E4%BD%BF%E7%94%A8npm%20link/" rel="next" title="npm-使用npm link">
+                <i class="fa fa-chevron-left"></i> npm-使用npm link
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/10/28/test/" rel="prev" title="test">
+                test <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81MDczMS8yNzIxMw=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar1.jpg"
+                alt="Lzxc" />
+            
+              <p class="site-author-name" itemprop="name">Lzxc</p>
+              <p class="site-description motion-element" itemprop="description">喜欢猫狗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lzxc" target="_blank" title="Github">
+                    
+                        <i class="fa fa-fw fa-github  github"></i>
+                    
+                    
+                        Github
+                    
+                    </a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/596ffabd518825568166be1e" target="_blank" title="Juejin">
+                    
+                        <i class="fa fa-fw fa-globe undefined"></i>
+                    
+                    
+                        Juejin
+                    
+                    </a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#chunks，module，bundle"><span class="nav-number">1.</span> <span class="nav-text">chunks，module，bundle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要拆分包"><span class="nav-number">2.</span> <span class="nav-text">为什么需要拆分包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何配置"><span class="nav-number">3.</span> <span class="nav-text">如何配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#index-js"><span class="nav-number">4.1.</span> <span class="nav-text">index.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-js"><span class="nav-number">4.2.</span> <span class="nav-text">a.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-js"><span class="nav-number">4.3.</span> <span class="nav-text">b.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c-js"><span class="nav-number">4.4.</span> <span class="nav-text">c.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-config-js"><span class="nav-number">4.5.</span> <span class="nav-text">webpack.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不配置任何splitChunks"><span class="nav-number">4.6.</span> <span class="nav-text">不配置任何splitChunks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可以看到index-js模块大小为324k，里面包含a-js，b-js，c-js，jquery"><span class="nav-number">4.6.1.</span> <span class="nav-text">可以看到index.js模块大小为324k，里面包含a.js，b.js，c.js，jquery</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初步配置splitChunks"><span class="nav-number">4.7.</span> <span class="nav-text">初步配置splitChunks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可以看到多了common-js模块大小为320k，里面包含a-js，b-js，c-js，jquery"><span class="nav-number">4.7.1.</span> <span class="nav-text">可以看到多了common.js模块大小为320k，里面包含a.js，b.js，c.js，jquery</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加权重priority，并且抽离node-modules中的第三方包"><span class="nav-number">4.8.</span> <span class="nav-text">添加权重priority，并且抽离node_modules中的第三方包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结果如下："><span class="nav-number">4.8.1.</span> <span class="nav-text">结果如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可以看到多出vendor-js，大小318kb，而index-js大小减少到6-23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出"><span class="nav-number">4.8.2.</span> <span class="nav-text">可以看到多出vendor.js，大小318kb，而index.js大小减少到6.23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽离指定文件"><span class="nav-number">4.9.</span> <span class="nav-text">抽离指定文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结果如下：-1"><span class="nav-number">4.9.1.</span> <span class="nav-text">结果如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可以看到utils-js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包"><span class="nav-number">4.9.2.</span> <span class="nav-text">可以看到utils.js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2020 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lzxc</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">11.7k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("2aWa7qK8GOTbESM9OEjhbca3-gzGzoHsz", "aIjeqqV6CRvmFMJHrN7Hq6x8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
