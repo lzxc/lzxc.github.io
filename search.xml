@@ -33,85 +33,6 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo+next+github-搭建个人博客</title>
-    <url>/2020/07/09/Hexo-next-github-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p><img src="/images/blog/hexo+github.jpg" alt="avatar"></p>
-<blockquote>
-<p><code>hexo</code> + <code>next</code> + <code>githubPage</code> 搭建个人博客教程</p>
-</blockquote>
-<a id="more"></a>
-
-<h1 id="一、环境配置"><a href="#一、环境配置" class="headerlink" title="一、环境配置"></a>一、环境配置</h1><p>hexo文档 : <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a><br>next文档 : <a href="https://theme-next.iissnan.com/" target="_blank" rel="noopener">https://theme-next.iissnan.com/</a><br>node: <a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">官网</a><br>github: <a href="https://github.com/" target="_blank" rel="noopener">官网</a></p>
-<p>安装node与安装hexo,新建github帐号</p>
-<p>以github帐号名新建一个repositories,取名为 : github帐号名+github.io,如<code>xxx.github.io</code><br><img src="/images/blog/github-new1.png" alt="avatar"></p>
-<h1 id="二、Hexo的安装与基本命令"><a href="#二、Hexo的安装与基本命令" class="headerlink" title="二、Hexo的安装与基本命令"></a>二、Hexo的安装与基本命令</h1><p>安装hexo : </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -g hexo</span><br></pre></td></tr></table></figure>
-
-<p>初始化在本地生成Hexo相关目录 :</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init Note  # 初始化创建,会再桌面创建Note文件夹</span><br><span class="line">cd Note         # 进入Note目录</span><br><span class="line">npm install     # 进一步安装hexo所需文件</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p> <strong>注: 直接执行hexo init需要在空文件夹，而hexo init xxx 类似创建空文件夹后再执行init</strong></p>
-</blockquote>
-<p>hexo三连 :</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean(or c)          # 清空已有hexo网站文件</span><br><span class="line">hexo generate(or g)   # 依据网页文本与新的CSS样式生成新网站文件</span><br><span class="line">hexo server(or s)     # 启动本地服务器,可以在localhost:4000查看网站修改效果</span><br></pre></td></tr></table></figure>
-
-<p>将刚刚新建的repositories与远程关联</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:AAAA&#x2F;AAAA.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-
-<h1 id="三、下载安装hexo主题"><a href="#三、下载安装hexo主题" class="headerlink" title="三、下载安装hexo主题"></a>三、下载安装hexo主题</h1><p>使用next主题 :</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;iissan&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>克隆完后,这时有两个配置文件,一个是hexo根目录的 <code>_config.yml</code> ,一个是next主题包的 <code>_config.yml</code> 注意区分</p>
-</blockquote>
-<h1 id="四、配置hexo-deploy"><a href="#四、配置hexo-deploy" class="headerlink" title="四、配置hexo-deploy"></a>四、配置hexo-deploy</h1><p>安装hexo的deploy工具 :</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -S hexo-deployer-git</span><br></pre></td></tr></table></figure>
-
-<p>修改hexo配置文件 :</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:xxx&#x2F;xxx.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>使用hexo-deploy发布到配置文件中的github项目 :</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo deploy  或  hexo d</span><br></pre></td></tr></table></figure>
-<p>此时执行 <code>hexo d</code> 便能根据hexo配置的deploy字段发布到对应仓库 </p>
-<p>其余hexo常用命令 :</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &quot;newArticleTitle&quot;  #创建文章 可以简写为hexo n</span><br><span class="line">hexo new page &quot;newPageName&quot;  #创建页面</span><br><span class="line">hexo generate  #生成静态页面至public目录 可以简写为hexo g</span><br><span class="line">hexo deploy  #将public目录部署到github 可以简写为hexo d</span><br><span class="line">hexo server  #启动本地服务 可以简写为hexo s</span><br><span class="line">hexo help  #hexo帮助</span><br><span class="line">hexo version  #查看版本信息</span><br><span class="line">hexo s -g  #生成页面并启动本地服务</span><br><span class="line">hexo d -g  #生成页面并部署到github</span><br></pre></td></tr></table></figure>
-
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>此时在浏览器输入 <code>xxx/github.io</code> 就能打开deploy上去的博客了,如果想跳转到自己购买的域名时,只需在刚刚的repositories根目录下新建 <code>CNAME</code> 的文件,写入你购买的域名即可</p>
-<p><strong>注: 配置next的menu时发现跳转页面地址解析错误,只需把 <code>tags: /tags || tags</code> 中的 <code>||</code> 号左右的空格删除即可解析正确</strong></p>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>npm-使用npm link</title>
-    <url>/2020/10/10/Npm-%E4%BD%BF%E7%94%A8npm%20link/</url>
-    <content><![CDATA[<p><img src="/images/npm/npm2.jpg" alt="avatar"></p>
-<blockquote>
-<p>如何使用 <strong><code>npm link</code></strong> 调试npm包</p>
-</blockquote>
-<a id="more"></a>
-<blockquote>
-<p>在发布之前我们需要在本地环境保证包的可用性与安全性，不能偷偷发版后再使用 <strong>npm install</strong> 测试包，<br>这时候就要用到 <strong>npm</strong> 的自带工具指令 <strong>npm link</strong></p>
-</blockquote>
-<h1 id="npm-link-原理"><a href="#npm-link-原理" class="headerlink" title="npm link 原理"></a>npm link 原理</h1><p>他与 <strong>npm install -g</strong> 不同在于，<strong>npm install -g</strong> 存储路径为 <strong>/usr/local/lib/node_modules</strong>，而<strong>link</strong> 则在本地做一个快捷方式映射</p>
-<p><img src="/images/npm/demo.png" alt="例子" title="例子"></p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><ol>
-<li>在本地环境的npm包项目中先<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm link</span><br></pre></td></tr></table></figure></li>
-<li>在到需要使用该库的项目中<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm link xxx(&#39;你的npm包&#39;)</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>npm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>npm-发布教程</title>
     <url>/2020/10/10/Npm-%E5%8F%91%E5%B8%83%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<p><img src="/images/npm/npm1.jpg" alt="avatar"></p>
@@ -162,6 +83,31 @@
 <li>预先检查发布包的文件内容，发布前可以通过 <strong>npm pack</strong> 查看将发布包的文件内容，一般都需要提前做好过滤文件，过滤 <strong>npm</strong> 提交规则使用 <strong>.npmignore</strong> 语法跟 <strong>.gitignore</strong> 类似，还可以<br>使用 <strong>npm link</strong> 可以参考以下文章：<a href="https://lzxc.online/2020/10/10/npm-使用npm%20link/" target="_blank" rel="noopener">npm-使用npm link</a></li>
 <li>检查包名字是否与npm库中存在重复名字</li>
 <li>检查版本号，每次发布都需要更新版本号，如果发布成功后发现版本号不对，可以参考以下文章： <a href="https://lzxc.online/2020/10/10/npm-删除包或指定版本包/" target="_blank" rel="noopener">删除包或指定版本包</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>npm-使用npm link</title>
+    <url>/2020/10/10/Npm-%E4%BD%BF%E7%94%A8npm%20link/</url>
+    <content><![CDATA[<p><img src="/images/npm/npm2.jpg" alt="avatar"></p>
+<blockquote>
+<p>如何使用 <strong><code>npm link</code></strong> 调试npm包</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>在发布之前我们需要在本地环境保证包的可用性与安全性，不能偷偷发版后再使用 <strong>npm install</strong> 测试包，<br>这时候就要用到 <strong>npm</strong> 的自带工具指令 <strong>npm link</strong></p>
+</blockquote>
+<h1 id="npm-link-原理"><a href="#npm-link-原理" class="headerlink" title="npm link 原理"></a>npm link 原理</h1><p>他与 <strong>npm install -g</strong> 不同在于，<strong>npm install -g</strong> 存储路径为 <strong>/usr/local/lib/node_modules</strong>，而<strong>link</strong> 则在本地做一个快捷方式映射</p>
+<p><img src="/images/npm/demo.png" alt="例子" title="例子"></p>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><ol>
+<li>在本地环境的npm包项目中先<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm link</span><br></pre></td></tr></table></figure></li>
+<li>在到需要使用该库的项目中<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm link xxx(&#39;你的npm包&#39;)</span><br></pre></td></tr></table></figure></li>
 </ol>
 ]]></content>
       <categories>
@@ -252,6 +198,113 @@
       </categories>
       <tags>
         <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo+next+github-搭建个人博客</title>
+    <url>/2020/07/09/Hexo-next-github-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p><img src="/images/blog/hexo+github.jpg" alt="avatar"></p>
+<blockquote>
+<p><code>hexo</code> + <code>next</code> + <code>githubPage</code> 搭建个人博客教程</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="一、环境配置"><a href="#一、环境配置" class="headerlink" title="一、环境配置"></a>一、环境配置</h1><p>hexo文档 : <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a><br>next文档 : <a href="https://theme-next.iissnan.com/" target="_blank" rel="noopener">https://theme-next.iissnan.com/</a><br>node: <a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">官网</a><br>github: <a href="https://github.com/" target="_blank" rel="noopener">官网</a></p>
+<p>安装node与安装hexo,新建github帐号</p>
+<p>以github帐号名新建一个repositories,取名为 : github帐号名+github.io,如<code>xxx.github.io</code><br><img src="/images/blog/github-new1.png" alt="avatar"></p>
+<h1 id="二、Hexo的安装与基本命令"><a href="#二、Hexo的安装与基本命令" class="headerlink" title="二、Hexo的安装与基本命令"></a>二、Hexo的安装与基本命令</h1><p>安装hexo : </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -g hexo</span><br></pre></td></tr></table></figure>
+
+<p>初始化在本地生成Hexo相关目录 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init Note  # 初始化创建,会再桌面创建Note文件夹</span><br><span class="line">cd Note         # 进入Note目录</span><br><span class="line">npm install     # 进一步安装hexo所需文件</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> <strong>注: 直接执行hexo init需要在空文件夹，而hexo init xxx 类似创建空文件夹后再执行init</strong></p>
+</blockquote>
+<p>hexo三连 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean(or c)          # 清空已有hexo网站文件</span><br><span class="line">hexo generate(or g)   # 依据网页文本与新的CSS样式生成新网站文件</span><br><span class="line">hexo server(or s)     # 启动本地服务器,可以在localhost:4000查看网站修改效果</span><br></pre></td></tr></table></figure>
+
+<p>将刚刚新建的repositories与远程关联</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:AAAA&#x2F;AAAA.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、下载安装hexo主题"><a href="#三、下载安装hexo主题" class="headerlink" title="三、下载安装hexo主题"></a>三、下载安装hexo主题</h1><p>使用next主题 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;iissan&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>克隆完后,这时有两个配置文件,一个是hexo根目录的 <code>_config.yml</code> ,一个是next主题包的 <code>_config.yml</code> 注意区分</p>
+</blockquote>
+<h1 id="四、配置hexo-deploy"><a href="#四、配置hexo-deploy" class="headerlink" title="四、配置hexo-deploy"></a>四、配置hexo-deploy</h1><p>安装hexo的deploy工具 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -S hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p>修改hexo配置文件 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:xxx&#x2F;xxx.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>使用hexo-deploy发布到配置文件中的github项目 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo deploy  或  hexo d</span><br></pre></td></tr></table></figure>
+<p>此时执行 <code>hexo d</code> 便能根据hexo配置的deploy字段发布到对应仓库 </p>
+<p>其余hexo常用命令 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &quot;newArticleTitle&quot;  #创建文章 可以简写为hexo n</span><br><span class="line">hexo new page &quot;newPageName&quot;  #创建页面</span><br><span class="line">hexo generate  #生成静态页面至public目录 可以简写为hexo g</span><br><span class="line">hexo deploy  #将public目录部署到github 可以简写为hexo d</span><br><span class="line">hexo server  #启动本地服务 可以简写为hexo s</span><br><span class="line">hexo help  #hexo帮助</span><br><span class="line">hexo version  #查看版本信息</span><br><span class="line">hexo s -g  #生成页面并启动本地服务</span><br><span class="line">hexo d -g  #生成页面并部署到github</span><br></pre></td></tr></table></figure>
+
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>此时在浏览器输入 <code>xxx/github.io</code> 就能打开deploy上去的博客了,如果想跳转到自己购买的域名时,只需在刚刚的repositories根目录下新建 <code>CNAME</code> 的文件,写入你购买的域名即可</p>
+<p><strong>注: 配置next的menu时发现跳转页面地址解析错误,只需把 <code>tags: /tags || tags</code> 中的 <code>||</code> 号左右的空格删除即可解析正确</strong></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>webpack之代码切割提取</title>
+    <url>/2020/10/16/Webpack-%E4%BB%A3%E7%A0%81%E5%88%87%E5%89%B2%E6%8F%90%E5%8F%96/</url>
+    <content><![CDATA[<p><img src="/images/webpack/webpack-optimize.png" alt="avatar"></p>
+<blockquote>
+<p><strong><code>Webpack SplitChunks</code></strong> 代码切割与提取</p>
+</blockquote>
+<a id="more"></a>
+
+<p>前文写过 <strong><code>Webpack</code></strong> 的优化配置，本文细说其中的 <strong><code>SplitChunks</code></strong> 配置</p>
+<h2 id="chunks，module，bundle"><a href="#chunks，module，bundle" class="headerlink" title="chunks，module，bundle"></a>chunks，module，bundle</h2><p>module：在js中，每一个导入导出的<code>模块</code>，称为<code>module</code>，比如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">module.export &#x3D; &#123;&#125;</span><br><span class="line">export default &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>引入的文件或库，插件等</p>
+<p>chunks：指<code>webpack</code>中的配置<code>splitChunks.chunks</code>，打包出来的入口文件:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">splitChunks: &#123;</span><br><span class="line">    chunks: &#39;all&#39;,</span><br><span class="line">    cacheGroups: &#123;</span><br><span class="line">        ****</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>bundle：由<code>webpack</code>最终拆分出来的每一个包，如<br><img src="/images/webpack/chunks.png" alt="chunks"></p>
+<h2 id="为什么需要拆分包"><a href="#为什么需要拆分包" class="headerlink" title="为什么需要拆分包"></a>为什么需要拆分包</h2><p>原因在于，随着项目开发后期时可能会引入第三方包，或者本地业务代码，工具库越来越大，首屏加载速度或某页面加载速度缓慢，单个文件可能达到几M甚至几十M的可能</p>
+<h2 id="如何配置"><a href="#如何配置" class="headerlink" title="如何配置"></a>如何配置</h2><p>首先说下<code>splitChunks</code>下有哪些配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">optimization:&#123;</span><br><span class="line">    splitChunks:&#123;</span><br><span class="line">        usedExports: &#39;&#39;, &#x2F;&#x2F; 找出模块使用哪些导出来处理导出名称，忽略未使用的导出并生成更有效的代码。如果是true：分析每个运行时使用的导出，则是&quot;global&quot;：全局分析所有运行时的导出合并。</span><br><span class="line">        chunks: &#39;&#39;, &#x2F;&#x2F; &#39;all&#39;,&#39;async&#39;,&#39;initial&#39;,  &#39;all&#39;:异步与非异步都进入该选项匹配中，&#39;async&#39;:只有异步模块进入，&#39;initial&#39;:初始化时就能获取的模块</span><br><span class="line">        minSize: &#39;&#39;, &#x2F;&#x2F; 生成块的最小大小(以字节为单位)</span><br><span class="line">        minRemainingSize: &#39;&#39;, &#x2F;&#x2F; 在webpack 5中引入了option选项，通过确保拆分后剩余的最小块大小超过限制来避免大小为零的模块。默认为0，平时少用到</span><br><span class="line">        maxSize: &#39;&#39;, &#x2F;&#x2F; 最大模块拆分大小</span><br><span class="line">        minChunks: &#39;&#39;, &#x2F;&#x2F; entry引用的次数最小值才会被抽离出去</span><br><span class="line">        maxAsyncRequests: &#39;&#39;, &#x2F;&#x2F; 按需加载时最大并行请求数</span><br><span class="line">        maxInitialRequests: &#39;&#39;, &#x2F;&#x2F; 入口点的最大并行请求数</span><br><span class="line">        automaticNameDelimiter: &#39;&#39;, &#x2F;&#x2F; 默认情况下，webpack将使用块的来源和名称生成名称（例如vendors~main.js）。此选项使您可以指定用于生成名称的定界符。</span><br><span class="line">        enforceSizeThreshold: &#39;&#39;, &#x2F;&#x2F; 强制执行拆分的大小阈值和其他限制（minRemainingSize，maxAsyncRequests，maxInitialRequests）将被忽略。</span><br><span class="line">        &#x2F;&#x2F; 核心配置，对代码的拆分规则全在cacheGroups缓存组里配置，缓存组的每一个属性都是一个配置规则，我这里给他的default属性进行了配置，属性名可以不叫default可以自己定。属性的值是一个对象，里面放的我们对一个代码拆分规则的描述。</span><br><span class="line">        cacheGroups: [</span><br><span class="line">            &#123;</span><br><span class="line">                name: &#39;&#39;, &#x2F;&#x2F; 提取出来的公共模块将会以这个来命名</span><br><span class="line">                chunks: &#39;&#39;, &#x2F;&#x2F; 指定哪些类型的chunk参与拆分，值可以是string可以是函数</span><br><span class="line">                priority: &#39;&#39;, &#x2F;&#x2F; cacheGroups中存在多个cache配置，该配置为当前规则的权重，越大匹配优先级越高</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>cacheGroups</code>外的配置为<code>splitChunks</code>的全局配置，每一个<code>cacheGroups</code>中配置都会使用外部的配置</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>假设项目文件夹为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|--public&#x2F;</span><br><span class="line">|   |--index.html</span><br><span class="line">|--src&#x2F;</span><br><span class="line">|   |--a.js</span><br><span class="line">|   |--b.js</span><br><span class="line">|   |--c.js</span><br><span class="line">|   |--index.js</span><br><span class="line">|--package.json</span><br><span class="line">|--webpack.config.js</span><br></pre></td></tr></table></figure>
+<h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;index.js</span><br><span class="line">import a from &#39;.&#x2F;a.js&#39;;</span><br><span class="line">import b from &#39;.&#x2F;b.js&#39;;</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;index-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br></pre></td></tr></table></figure>
+<h3 id="a-js"><a href="#a-js" class="headerlink" title="a.js"></a>a.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;a.js</span><br><span class="line">require(&#39;.&#x2F;c.js&#39;);</span><br><span class="line">const $ &#x3D; require(&#39;jquery&#39;)</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;a-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
+<h3 id="b-js"><a href="#b-js" class="headerlink" title="b.js"></a>b.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;b.js</span><br><span class="line">require(&#39;.&#x2F;c.js&#39;);</span><br><span class="line">const $ &#x3D; require(&#39;jquery&#39;)</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;b-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
+<h3 id="c-js"><a href="#c-js" class="headerlink" title="c.js"></a>c.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;c.js</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;c-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; webpack.config.js</span><br><span class="line">const path &#x3D; require(&#39;path&#39;);</span><br><span class="line">const HtmlWebpackPlugin &#x3D; require(&#39;html-webpack-plugin&#39;);</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    entry: &#123;</span><br><span class="line">        index: &#39;.&#x2F;src&#x2F;index.js&#39;,</span><br><span class="line">    &#125;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, &#39;dist&#39;),</span><br><span class="line">        filename: &#39;[name].js&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: &#39;.&#x2F;public&#x2F;index.html&#39;,</span><br><span class="line">            filename: &#39;index.html&#39;</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="不配置任何splitChunks"><a href="#不配置任何splitChunks" class="headerlink" title="不配置任何splitChunks"></a>不配置任何splitChunks</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 58f075d584eee63560d0</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 229ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午3:49:40</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line">index.html  247 bytes          [emitted]</span><br><span class="line">  index.js    324 KiB   index  [emitted]  index</span><br><span class="line">Entrypoint index &#x3D; index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;index&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以看到index-js模块大小为324k，里面包含a-js，b-js，c-js，jquery"><a href="#可以看到index-js模块大小为324k，里面包含a-js，b-js，c-js，jquery" class="headerlink" title="可以看到index.js模块大小为324k，里面包含a.js，b.js，c.js，jquery"></a>可以看到<code>index.js</code>模块大小为324k，里面包含a.js，b.js，c.js，jquery</h4><h3 id="初步配置splitChunks"><a href="#初步配置splitChunks" class="headerlink" title="初步配置splitChunks"></a>初步配置splitChunks</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;webpack.config.js</span><br><span class="line"></span><br><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 5d698c9c939438c2aa3b</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 226ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午3:52:26</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js    320 KiB  common  [emitted]  common</span><br><span class="line">index.html  280 bytes          [emitted]</span><br><span class="line">  index.js   6.22 KiB   index  [emitted]  index</span><br><span class="line">Entrypoint index &#x3D; common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以看到多了common-js模块大小为320k，里面包含a-js，b-js，c-js，jquery"><a href="#可以看到多了common-js模块大小为320k，里面包含a-js，b-js，c-js，jquery" class="headerlink" title="可以看到多了common.js模块大小为320k，里面包含a.js，b.js，c.js，jquery"></a>可以看到多了<code>common.js</code>模块大小为320k，里面包含a.js，b.js，c.js，jquery</h4><h3 id="添加权重priority，并且抽离node-modules中的第三方包"><a href="#添加权重priority，并且抽离node-modules中的第三方包" class="headerlink" title="添加权重priority，并且抽离node_modules中的第三方包"></a>添加权重<code>priority</code>，并且抽离<code>node_modules</code>中的第三方包</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        minSize: 30,</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -20</span><br><span class="line">            &#125;,</span><br><span class="line">            vendors: &#123;  &#x2F;&#x2F;拆分第三方库（通过npm|yarn安装的库）</span><br><span class="line">                test: &#x2F;[\\&#x2F;]node_modules[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;vendor&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -10</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="结果如下："><a href="#结果如下：" class="headerlink" title="结果如下："></a>结果如下：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 40141540a6afd27e4c34</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 237ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午4:00:24</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js   2.27 KiB  common  [emitted]  common</span><br><span class="line">index.html  313 bytes          [emitted]</span><br><span class="line">  index.js   6.23 KiB   index  [emitted]  index</span><br><span class="line"> vendor.js    318 KiB  vendor  [emitted]  vendor</span><br><span class="line">Entrypoint index &#x3D; vendor.js common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以看到多出vendor-js，大小318kb，而index-js大小减少到6-23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出"><a href="#可以看到多出vendor-js，大小318kb，而index-js大小减少到6-23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出" class="headerlink" title="可以看到多出vendor.js，大小318kb，而index.js大小减少到6.23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出"></a>可以看到多出<code>vendor.js</code>，大小318kb，而<code>index.js</code>大小减少到6.23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出</h4><h3 id="抽离指定文件"><a href="#抽离指定文件" class="headerlink" title="抽离指定文件"></a>抽离指定文件</h3><p>在<code>src/common</code>新增<code>utils.js</code>，并在<code>index.js</code>中引用他</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        minSize: 30,</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -20</span><br><span class="line">            &#125;,</span><br><span class="line">            vendors: &#123;  &#x2F;&#x2F;拆分第三方库（通过npm|yarn安装的库）</span><br><span class="line">                test: &#x2F;[\\&#x2F;]node_modules[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;vendor&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -10</span><br><span class="line">            &#125;,</span><br><span class="line">            utils:&#123;</span><br><span class="line">                test:&#x2F;[\\&#x2F;]src[\\&#x2F;]common[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;utils&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -9</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="结果如下：-1"><a href="#结果如下：-1" class="headerlink" title="结果如下："></a>结果如下：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: ec7341e5722a3d0efd5a</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 238ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午4:09:31</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js   2.31 KiB  common  [emitted]  common</span><br><span class="line">index.html  345 bytes          [emitted]</span><br><span class="line">  index.js   6.24 KiB   index  [emitted]  index</span><br><span class="line">  utils.js  387 bytes   utils  [emitted]  utils</span><br><span class="line"> vendor.js    318 KiB  vendor  [emitted]  vendor</span><br><span class="line">Entrypoint index &#x3D; utils.js vendor.js common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;common&#x2F;utils.js] 34 bytes &#123;utils&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 148 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以看到utils-js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包"><a href="#可以看到utils-js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包" class="headerlink" title="可以看到utils.js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包"></a>可以看到<code>utils.js</code>已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包</h4><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p><code>splitChunks</code>的抽离能节省许多重复代码的引入，加载。对项目大小与用户体验起到很大作用</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -376,59 +429,6 @@
 <p><strong>@babel/polyfill</strong></p>
 <p>合理配置Babel配置，使用对应polyfill达到优化的目的</p>
 <p>参考 帖子：<a href="https://juejin.im/post/5ddff3abe51d4502d56bd143#heading-7" target="_blank">刘小夕-不容错过的 Babel7 知识</a></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>webpack</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>webpack之代码切割提取</title>
-    <url>/2020/10/16/Webpack-%E4%BB%A3%E7%A0%81%E5%88%87%E5%89%B2%E6%8F%90%E5%8F%96/</url>
-    <content><![CDATA[<p><img src="/images/webpack/webpack-optimize.png" alt="avatar"></p>
-<blockquote>
-<p><strong><code>Webpack SplitChunks</code></strong> 代码切割与提取</p>
-</blockquote>
-<a id="more"></a>
-
-<p>前文写过 <strong><code>Webpack</code></strong> 的优化配置，本文细说其中的 <strong><code>SplitChunks</code></strong> 配置</p>
-<h2 id="chunks，module，bundle"><a href="#chunks，module，bundle" class="headerlink" title="chunks，module，bundle"></a>chunks，module，bundle</h2><p>module：在js中，每一个导入导出的<code>模块</code>，称为<code>module</code>，比如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">module.export &#x3D; &#123;&#125;</span><br><span class="line">export default &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>引入的文件或库，插件等</p>
-<p>chunks：指<code>webpack</code>中的配置<code>splitChunks.chunks</code>，打包出来的入口文件:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">splitChunks: &#123;</span><br><span class="line">    chunks: &#39;all&#39;,</span><br><span class="line">    cacheGroups: &#123;</span><br><span class="line">        ****</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>bundle：由<code>webpack</code>最终拆分出来的每一个包，如<br><img src="/images/webpack/chunks.png" alt="chunks"></p>
-<h2 id="为什么需要拆分包"><a href="#为什么需要拆分包" class="headerlink" title="为什么需要拆分包"></a>为什么需要拆分包</h2><p>原因在于，随着项目开发后期时可能会引入第三方包，或者本地业务代码，工具库越来越大，首屏加载速度或某页面加载速度缓慢，单个文件可能达到几M甚至几十M的可能</p>
-<h2 id="如何配置"><a href="#如何配置" class="headerlink" title="如何配置"></a>如何配置</h2><p>首先说下<code>splitChunks</code>下有哪些配置</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">optimization:&#123;</span><br><span class="line">    splitChunks:&#123;</span><br><span class="line">        usedExports: &#39;&#39;, &#x2F;&#x2F; 找出模块使用哪些导出来处理导出名称，忽略未使用的导出并生成更有效的代码。如果是true：分析每个运行时使用的导出，则是&quot;global&quot;：全局分析所有运行时的导出合并。</span><br><span class="line">        chunks: &#39;&#39;, &#x2F;&#x2F; &#39;all&#39;,&#39;async&#39;,&#39;initial&#39;,  &#39;all&#39;:异步与非异步都进入该选项匹配中，&#39;async&#39;:只有异步模块进入，&#39;initial&#39;:初始化时就能获取的模块</span><br><span class="line">        minSize: &#39;&#39;, &#x2F;&#x2F; 生成块的最小大小(以字节为单位)</span><br><span class="line">        minRemainingSize: &#39;&#39;, &#x2F;&#x2F; 在webpack 5中引入了option选项，通过确保拆分后剩余的最小块大小超过限制来避免大小为零的模块。默认为0，平时少用到</span><br><span class="line">        maxSize: &#39;&#39;, &#x2F;&#x2F; 最大模块拆分大小</span><br><span class="line">        minChunks: &#39;&#39;, &#x2F;&#x2F; entry引用的次数最小值才会被抽离出去</span><br><span class="line">        maxAsyncRequests: &#39;&#39;, &#x2F;&#x2F; 按需加载时最大并行请求数</span><br><span class="line">        maxInitialRequests: &#39;&#39;, &#x2F;&#x2F; 入口点的最大并行请求数</span><br><span class="line">        automaticNameDelimiter: &#39;&#39;, &#x2F;&#x2F; 默认情况下，webpack将使用块的来源和名称生成名称（例如vendors~main.js）。此选项使您可以指定用于生成名称的定界符。</span><br><span class="line">        enforceSizeThreshold: &#39;&#39;, &#x2F;&#x2F; 强制执行拆分的大小阈值和其他限制（minRemainingSize，maxAsyncRequests，maxInitialRequests）将被忽略。</span><br><span class="line">        &#x2F;&#x2F; 核心配置，对代码的拆分规则全在cacheGroups缓存组里配置，缓存组的每一个属性都是一个配置规则，我这里给他的default属性进行了配置，属性名可以不叫default可以自己定。属性的值是一个对象，里面放的我们对一个代码拆分规则的描述。</span><br><span class="line">        cacheGroups: [</span><br><span class="line">            &#123;</span><br><span class="line">                name: &#39;&#39;, &#x2F;&#x2F; 提取出来的公共模块将会以这个来命名</span><br><span class="line">                chunks: &#39;&#39;, &#x2F;&#x2F; 指定哪些类型的chunk参与拆分，值可以是string可以是函数</span><br><span class="line">                priority: &#39;&#39;, &#x2F;&#x2F; cacheGroups中存在多个cache配置，该配置为当前规则的权重，越大匹配优先级越高</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>cacheGroups</code>外的配置为<code>splitChunks</code>的全局配置，每一个<code>cacheGroups</code>中配置都会使用外部的配置</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>假设项目文件夹为</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|--public&#x2F;</span><br><span class="line">|   |--index.html</span><br><span class="line">|--src&#x2F;</span><br><span class="line">|   |--a.js</span><br><span class="line">|   |--b.js</span><br><span class="line">|   |--c.js</span><br><span class="line">|   |--index.js</span><br><span class="line">|--package.json</span><br><span class="line">|--webpack.config.js</span><br></pre></td></tr></table></figure>
-<h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;index.js</span><br><span class="line">import a from &#39;.&#x2F;a.js&#39;;</span><br><span class="line">import b from &#39;.&#x2F;b.js&#39;;</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;index-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br></pre></td></tr></table></figure>
-<h3 id="a-js"><a href="#a-js" class="headerlink" title="a.js"></a>a.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;a.js</span><br><span class="line">require(&#39;.&#x2F;c.js&#39;);</span><br><span class="line">const $ &#x3D; require(&#39;jquery&#39;)</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;a-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
-<h3 id="b-js"><a href="#b-js" class="headerlink" title="b.js"></a>b.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;b.js</span><br><span class="line">require(&#39;.&#x2F;c.js&#39;);</span><br><span class="line">const $ &#x3D; require(&#39;jquery&#39;)</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;b-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
-<h3 id="c-js"><a href="#c-js" class="headerlink" title="c.js"></a>c.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;c.js</span><br><span class="line">function fn() &#123;</span><br><span class="line">    console.log(&#39;c-------&#39;);</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; fn();</span><br></pre></td></tr></table></figure>
-<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; webpack.config.js</span><br><span class="line">const path &#x3D; require(&#39;path&#39;);</span><br><span class="line">const HtmlWebpackPlugin &#x3D; require(&#39;html-webpack-plugin&#39;);</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    entry: &#123;</span><br><span class="line">        index: &#39;.&#x2F;src&#x2F;index.js&#39;,</span><br><span class="line">    &#125;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, &#39;dist&#39;),</span><br><span class="line">        filename: &#39;[name].js&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: &#39;.&#x2F;public&#x2F;index.html&#39;,</span><br><span class="line">            filename: &#39;index.html&#39;</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="不配置任何splitChunks"><a href="#不配置任何splitChunks" class="headerlink" title="不配置任何splitChunks"></a>不配置任何splitChunks</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 58f075d584eee63560d0</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 229ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午3:49:40</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line">index.html  247 bytes          [emitted]</span><br><span class="line">  index.js    324 KiB   index  [emitted]  index</span><br><span class="line">Entrypoint index &#x3D; index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;index&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;index&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
-
-<h4 id="可以看到index-js模块大小为324k，里面包含a-js，b-js，c-js，jquery"><a href="#可以看到index-js模块大小为324k，里面包含a-js，b-js，c-js，jquery" class="headerlink" title="可以看到index.js模块大小为324k，里面包含a.js，b.js，c.js，jquery"></a>可以看到<code>index.js</code>模块大小为324k，里面包含a.js，b.js，c.js，jquery</h4><h3 id="初步配置splitChunks"><a href="#初步配置splitChunks" class="headerlink" title="初步配置splitChunks"></a>初步配置splitChunks</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;webpack.config.js</span><br><span class="line"></span><br><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 5d698c9c939438c2aa3b</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 226ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午3:52:26</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js    320 KiB  common  [emitted]  common</span><br><span class="line">index.html  280 bytes          [emitted]</span><br><span class="line">  index.js   6.22 KiB   index  [emitted]  index</span><br><span class="line">Entrypoint index &#x3D; common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
-
-<h4 id="可以看到多了common-js模块大小为320k，里面包含a-js，b-js，c-js，jquery"><a href="#可以看到多了common-js模块大小为320k，里面包含a-js，b-js，c-js，jquery" class="headerlink" title="可以看到多了common.js模块大小为320k，里面包含a.js，b.js，c.js，jquery"></a>可以看到多了<code>common.js</code>模块大小为320k，里面包含a.js，b.js，c.js，jquery</h4><h3 id="添加权重priority，并且抽离node-modules中的第三方包"><a href="#添加权重priority，并且抽离node-modules中的第三方包" class="headerlink" title="添加权重priority，并且抽离node_modules中的第三方包"></a>添加权重<code>priority</code>，并且抽离<code>node_modules</code>中的第三方包</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        minSize: 30,</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -20</span><br><span class="line">            &#125;,</span><br><span class="line">            vendors: &#123;  &#x2F;&#x2F;拆分第三方库（通过npm|yarn安装的库）</span><br><span class="line">                test: &#x2F;[\\&#x2F;]node_modules[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;vendor&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -10</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<h4 id="结果如下："><a href="#结果如下：" class="headerlink" title="结果如下："></a>结果如下：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: 40141540a6afd27e4c34</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 237ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午4:00:24</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js   2.27 KiB  common  [emitted]  common</span><br><span class="line">index.html  313 bytes          [emitted]</span><br><span class="line">  index.js   6.23 KiB   index  [emitted]  index</span><br><span class="line"> vendor.js    318 KiB  vendor  [emitted]  vendor</span><br><span class="line">Entrypoint index &#x3D; vendor.js common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 151 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
-
-<h4 id="可以看到多出vendor-js，大小318kb，而index-js大小减少到6-23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出"><a href="#可以看到多出vendor-js，大小318kb，而index-js大小减少到6-23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出" class="headerlink" title="可以看到多出vendor.js，大小318kb，而index.js大小减少到6.23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出"></a>可以看到多出<code>vendor.js</code>，大小318kb，而<code>index.js</code>大小减少到6.23kb，说明jQuery已经被抽离了，同时业务逻辑代码也抽离出</h4><h3 id="抽离指定文件"><a href="#抽离指定文件" class="headerlink" title="抽离指定文件"></a>抽离指定文件</h3><p>在<code>src/common</code>新增<code>utils.js</code>，并在<code>index.js</code>中引用他</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">        minSize: 30,</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">            default: &#123;</span><br><span class="line">                name: &#39;common&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -20</span><br><span class="line">            &#125;,</span><br><span class="line">            vendors: &#123;  &#x2F;&#x2F;拆分第三方库（通过npm|yarn安装的库）</span><br><span class="line">                test: &#x2F;[\\&#x2F;]node_modules[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;vendor&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -10</span><br><span class="line">            &#125;,</span><br><span class="line">            utils:&#123;</span><br><span class="line">                test:&#x2F;[\\&#x2F;]src[\\&#x2F;]common[\\&#x2F;]&#x2F;,</span><br><span class="line">                name: &#39;utils&#39;,</span><br><span class="line">                chunks: &#39;initial&#39;,</span><br><span class="line">                priority: -9</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="结果如下：-1"><a href="#结果如下：-1" class="headerlink" title="结果如下："></a>结果如下：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; webpack --mode&#x3D;development</span><br><span class="line"></span><br><span class="line">Hash: ec7341e5722a3d0efd5a</span><br><span class="line">Version: webpack 4.44.2</span><br><span class="line">Time: 238ms</span><br><span class="line">Built at: 2020&#x2F;10&#x2F;20 下午4:09:31</span><br><span class="line">     Asset       Size  Chunks             Chunk Names</span><br><span class="line"> common.js   2.31 KiB  common  [emitted]  common</span><br><span class="line">index.html  345 bytes          [emitted]</span><br><span class="line">  index.js   6.24 KiB   index  [emitted]  index</span><br><span class="line">  utils.js  387 bytes   utils  [emitted]  utils</span><br><span class="line"> vendor.js    318 KiB  vendor  [emitted]  vendor</span><br><span class="line">Entrypoint index &#x3D; utils.js vendor.js common.js index.js</span><br><span class="line">[.&#x2F;src&#x2F;a.js] 157 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;b.js] 129 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;c.js] 80 bytes &#123;common&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;common&#x2F;utils.js] 34 bytes &#123;utils&#125; [built]</span><br><span class="line">[.&#x2F;src&#x2F;index.js] 148 bytes &#123;common&#125; [built]</span><br><span class="line">    + 1 hidden module</span><br><span class="line">Child HtmlWebpackCompiler:</span><br><span class="line">     1 asset</span><br><span class="line">    Entrypoint HtmlWebpackPlugin_0 &#x3D; __child-HtmlWebpackPlugin_0</span><br><span class="line">    [.&#x2F;node_modules&#x2F;html-webpack-plugin&#x2F;lib&#x2F;loader.js!.&#x2F;public&#x2F;index.html] 474 bytes &#123;HtmlWebpackPlugin_0&#125; [built]</span><br></pre></td></tr></table></figure>
-
-<h4 id="可以看到utils-js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包"><a href="#可以看到utils-js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包" class="headerlink" title="可以看到utils.js已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包"></a>可以看到<code>utils.js</code>已经被单独抽离成一个chunks，至此已经实现抽离第三方包，业务代码，工具模块，指定模块包</h4><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p><code>splitChunks</code>的抽离能节省许多重复代码的引入，加载。对项目大小与用户体验起到很大作用</p>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -596,6 +596,42 @@
       </tags>
   </entry>
   <entry>
+    <title>最简实现Promise</title>
+    <url>/2021/02/22/%E6%9C%80%E7%AE%80%E5%AE%9E%E7%8E%B0Promise/</url>
+    <content><![CDATA[<p><img src="/images/javascript/promise.jpg" alt="avatar"></p>
+<blockquote>
+<p>最简实现 <strong><code>Promise</code></strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="先上代码"><a href="#先上代码" class="headerlink" title="先上代码"></a>先上代码</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function Promise(fn) &#123;</span><br><span class="line">  this.cbs &#x3D; []</span><br><span class="line"></span><br><span class="line">  const resolve &#x3D; (value) &#x3D;&gt; &#123;</span><br><span class="line">    setTimeOut(()&#x3D;&gt;&#123;</span><br><span class="line">      this.data &#x3D; value</span><br><span class="line">      this.cbs.forEach((cb) &#x3D;&gt; cb(value))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fn(resolve)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise.prototype.then &#x3D; function(onResolved) &#123;</span><br><span class="line">  return new Promise((resolve) &#x3D;&gt; &#123;</span><br><span class="line">    this.cbs.push(()&#x3D;&gt;&#123;</span><br><span class="line">      const res &#x3D; onResolved(this.data)</span><br><span class="line">      if(res instanceof Promise)&#123;</span><br><span class="line">        res.then(resolve)</span><br><span class="line">      &#125;else&#123;</span><br><span class="line">        resolve(resolve)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码"></a>分析代码</h2><p>先上使用例子</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">new Promise((resolve,reject) &#x3D;&gt; &#123;</span><br><span class="line">  setTime(() &#x3D;&gt; &#123;</span><br><span class="line">    resolve(1)</span><br><span class="line">  &#125;,1000)</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; then1</span><br><span class="line">.then(res &#x3D;&gt; &#123;</span><br><span class="line">    return new Promise((resolve,reject) &#x3D;&gt; &#123;</span><br><span class="line">      setTimeOut(() &#x3D;&gt; &#123;</span><br><span class="line">        resolve(2)</span><br><span class="line">      &#125;, 2000)</span><br><span class="line">    &#125;)</span><br><span class="line">    &#x2F;&#x2F; then2</span><br><span class="line">    .then(res &#x3D;&gt; &#123;</span><br><span class="line">      console.log(res)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>首先分析Promise构造函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 此处fn为new Promise传入的函数</span><br><span class="line">function Promise(fn) &#123;</span><br><span class="line">  &#x2F;&#x2F; 在实例上挂载Promise resolve时的回调函数集</span><br><span class="line">  this.cbs &#x3D; []</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 传递给Promise处理函数的resolve，相当于是原生Promise中入参处理函数中，取到的第一个参数resolve</span><br><span class="line">  &#x2F;&#x2F; 在实例上挂载处理函数的结果，并执行一遍回调函数集</span><br><span class="line">  const resolve &#x3D; (value) &#x3D;&gt; &#123;</span><br><span class="line">    setTimeOut(() &#x3D;&gt; &#123;</span><br><span class="line">      this.data &#x3D; value</span><br><span class="line">      this.cbs.forEach((cb) &#x3D;&gt; cb(value))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 执行用户传入的函数 </span><br><span class="line">  &#x2F;&#x2F; 并且把resolve方法交给用户执行</span><br><span class="line">  fn(resolve)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Promise最重要的是链式调用，重点在then的实现方式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Promise.prototype.then &#x3D; function(onResolved) &#123;</span><br><span class="line">  &#x2F;&#x2F; 此处this指向上面的构造函数作用域</span><br><span class="line">  return new Promise((resolve) &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 每一个then，都会往this.cbs推入一个执行栈，等待后续执行</span><br><span class="line">    this.cbs.push(() &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; 此处的onResolved为then内部的入参，res为执行结果</span><br><span class="line">      const res &#x3D; onResolved(this.data)</span><br><span class="line">      &#x2F;&#x2F; 如果res执行结果依旧为Promise的原型链上，即内部return new Promise，则继续将resolve传递入下一个then </span><br><span class="line">      if(res instanceof Promise) &#123;</span><br><span class="line">        res.then(resolve)</span><br><span class="line">      &#125;else &#123;</span><br><span class="line">        resolve(res)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="结合例子"><a href="#结合例子" class="headerlink" title="结合例子"></a>结合例子</h5><ol>
+<li>第一次 <strong>new Promise()</strong> 执行时，返回的实例称为 <strong>promise1</strong></li>
+<li><strong>then</strong> 的实现中，返回的实例称为 <strong>promise2</strong></li>
+<li>第一次 <strong>new Promise().then</strong> 中，用户手动 <strong>return new Promise()</strong> 这里称为 <strong>user promise</strong></li>
+<li>在 <strong>promise2</strong> 中的this，其实指向 <strong>promise1</strong>。在 <strong>promise2</strong> 中的函数会往this.cbs推入，等待执行</li>
+<li>而 <strong>this.cbs.push()</strong> 中的函数，只有在 <strong>promise1</strong> resolve后才会执行。如果用户传入给 <strong>then</strong> 的执行函数中 <strong>（onResolved ）</strong> 返回了 <strong>user promise</strong> ，用户会在合适的时机执行 <strong>resolve promise2</strong> ，这时内部的 <code>if (res instanceof Promise) {   res.then(resolve)   }</code> 就会执行</li>
+<li><strong>then2</strong> 中的函数只有在 <strong>promise2 resolve</strong> 后才会执行，此时 <strong>then2</strong> 是挂载到 <strong>promise2</strong> 的cbs中的，最终实现异步链式调用</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Promise</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浏览器输入URL后发生什么</title>
     <url>/2021/02/02/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88/</url>
     <content><![CDATA[<img src="/images/browser/inter-to-browser.jpg" style="height:350px;">
@@ -664,42 +700,6 @@
       </categories>
       <tags>
         <tag>浏览器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>最简实现Promise</title>
-    <url>/2021/02/22/%E6%9C%80%E7%AE%80%E5%AE%9E%E7%8E%B0Promise/</url>
-    <content><![CDATA[<p><img src="/images/javascript/promise.jpg" alt="avatar"></p>
-<blockquote>
-<p>最简实现 <strong><code>Promise</code></strong></p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="先上代码"><a href="#先上代码" class="headerlink" title="先上代码"></a>先上代码</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function Promise(fn) &#123;</span><br><span class="line">  this.cbs &#x3D; []</span><br><span class="line"></span><br><span class="line">  const resolve &#x3D; (value) &#x3D;&gt; &#123;</span><br><span class="line">    setTimeOut(()&#x3D;&gt;&#123;</span><br><span class="line">      this.data &#x3D; value</span><br><span class="line">      this.cbs.forEach((cb) &#x3D;&gt; cb(value))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fn(resolve)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise.prototype.then &#x3D; function(onResolved) &#123;</span><br><span class="line">  return new Promise((resolve) &#x3D;&gt; &#123;</span><br><span class="line">    this.cbs.push(()&#x3D;&gt;&#123;</span><br><span class="line">      const res &#x3D; onResolved(this.data)</span><br><span class="line">      if(res instanceof Promise)&#123;</span><br><span class="line">        res.then(resolve)</span><br><span class="line">      &#125;else&#123;</span><br><span class="line">        resolve(resolve)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码"></a>分析代码</h2><p>先上使用例子</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">new Promise((resolve,reject) &#x3D;&gt; &#123;</span><br><span class="line">  setTime(() &#x3D;&gt; &#123;</span><br><span class="line">    resolve(1)</span><br><span class="line">  &#125;,1000)</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; then1</span><br><span class="line">.then(res &#x3D;&gt; &#123;</span><br><span class="line">    return new Promise((resolve,reject) &#x3D;&gt; &#123;</span><br><span class="line">      setTimeOut(() &#x3D;&gt; &#123;</span><br><span class="line">        resolve(2)</span><br><span class="line">      &#125;, 2000)</span><br><span class="line">    &#125;)</span><br><span class="line">    &#x2F;&#x2F; then2</span><br><span class="line">    .then(res &#x3D;&gt; &#123;</span><br><span class="line">      console.log(res)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>首先分析Promise构造函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 此处fn为new Promise传入的函数</span><br><span class="line">function Promise(fn) &#123;</span><br><span class="line">  &#x2F;&#x2F; 在实例上挂载Promise resolve时的回调函数集</span><br><span class="line">  this.cbs &#x3D; []</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 传递给Promise处理函数的resolve，相当于是原生Promise中入参处理函数中，取到的第一个参数resolve</span><br><span class="line">  &#x2F;&#x2F; 在实例上挂载处理函数的结果，并执行一遍回调函数集</span><br><span class="line">  const resolve &#x3D; (value) &#x3D;&gt; &#123;</span><br><span class="line">    setTimeOut(() &#x3D;&gt; &#123;</span><br><span class="line">      this.data &#x3D; value</span><br><span class="line">      this.cbs.forEach((cb) &#x3D;&gt; cb(value))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 执行用户传入的函数 </span><br><span class="line">  &#x2F;&#x2F; 并且把resolve方法交给用户执行</span><br><span class="line">  fn(resolve)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Promise最重要的是链式调用，重点在then的实现方式</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Promise.prototype.then &#x3D; function(onResolved) &#123;</span><br><span class="line">  &#x2F;&#x2F; 此处this指向上面的构造函数作用域</span><br><span class="line">  return new Promise((resolve) &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 每一个then，都会往this.cbs推入一个执行栈，等待后续执行</span><br><span class="line">    this.cbs.push(() &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; 此处的onResolved为then内部的入参，res为执行结果</span><br><span class="line">      const res &#x3D; onResolved(this.data)</span><br><span class="line">      &#x2F;&#x2F; 如果res执行结果依旧为Promise的原型链上，即内部return new Promise，则继续将resolve传递入下一个then </span><br><span class="line">      if(res instanceof Promise) &#123;</span><br><span class="line">        res.then(resolve)</span><br><span class="line">      &#125;else &#123;</span><br><span class="line">        resolve(res)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="结合例子"><a href="#结合例子" class="headerlink" title="结合例子"></a>结合例子</h5><ol>
-<li>第一次 <strong>new Promise()</strong> 执行时，返回的实例称为 <strong>promise1</strong></li>
-<li><strong>then</strong> 的实现中，返回的实例称为 <strong>promise2</strong></li>
-<li>第一次 <strong>new Promise().then</strong> 中，用户手动 <strong>return new Promise()</strong> 这里称为 <strong>user promise</strong></li>
-<li>在 <strong>promise2</strong> 中的this，其实指向 <strong>promise1</strong>。在 <strong>promise2</strong> 中的函数会往this.cbs推入，等待执行</li>
-<li>而 <strong>this.cbs.push()</strong> 中的函数，只有在 <strong>promise1</strong> resolve后才会执行。如果用户传入给 <strong>then</strong> 的执行函数中 <strong>（onResolved ）</strong> 返回了 <strong>user promise</strong> ，用户会在合适的时机执行 <strong>resolve promise2</strong> ，这时内部的 <code>if (res instanceof Promise) {   res.then(resolve)   }</code> 就会执行</li>
-<li><strong>then2</strong> 中的函数只有在 <strong>promise2 resolve</strong> 后才会执行，此时 <strong>then2</strong> 是挂载到 <strong>promise2</strong> 的cbs中的，最终实现异步链式调用</li>
-</ol>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>Promise</tag>
       </tags>
   </entry>
 </search>
