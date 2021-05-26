@@ -87,8 +87,10 @@
 <meta property="og:description" content="前端性能优化-preload、prefetch和defer、async">
 <meta property="og:image" content="http://yoursite.com/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/preload&prefetch.png">
 <meta property="og:image" content="http://yoursite.com/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/preload%E5%85%BC%E5%AE%B9%E6%80%A7.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/prefetch%E5%85%BC%E5%AE%B9%E6%80%A7.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/async&defer.png">
 <meta property="article:published_time" content="2021-05-26T03:38:14.000Z">
-<meta property="article:modified_time" content="2021-05-26T07:29:30.191Z">
+<meta property="article:modified_time" content="2021-05-26T07:56:52.710Z">
 <meta property="article:author" content="Lzxc">
 <meta property="article:tag" content="性能优化">
 <meta name="twitter:card" content="summary">
@@ -402,7 +404,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  123
+                  1.5k
                 </span>
               
 
@@ -418,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -445,10 +447,65 @@
 </blockquote>
 <a id="more"></a>
 
-<h2 id="preload与prefetch"><a href="#preload与prefetch" class="headerlink" title="preload与prefetch"></a>preload与prefetch</h2><p>表示用户十分有可能需要在当前浏览中加载目标资源，所以浏览器必须预先获取和缓存对应资源且更不易阻塞页面的初步渲染进而提升性能<br>它可以通过 Link 标签进行创建：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; as属性在下面讲解</span><br><span class="line">&lt;link rel&#x3D;&quot;preload&quot; href&#x3D;&quot;&#x2F;path&#x2F;to&#x2F;style.css&quot; as&#x3D;&quot;style&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="preload"><a href="#preload" class="headerlink" title="preload"></a>preload</h1><p>表示用户十分有可能需要在当前浏览中加载目标资源，所以浏览器必须预先获取和缓存对应资源且更不易阻塞页面的初步渲染进而提升性能<br>它可以通过 <strong>Link</strong> 标签进行创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- as属性在下面讲解 --&gt;</span><br><span class="line">&lt;link rel&#x3D;&quot;preload&quot; href&#x3D;&quot;&#x2F;path&#x2F;to&#x2F;style.css&quot; as&#x3D;&quot;style&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- HTTP 响应头模式 --&gt;</span><br><span class="line">Link: &lt;https:&#x2F;&#x2F;example.com&#x2F;other&#x2F;styles.css&gt;; rel&#x3D;preload; as&#x3D;style</span><br></pre></td></tr></table></figure>
 
-<h2 id="preload兼容性"><a href="#preload兼容性" class="headerlink" title="preload兼容性"></a>preload兼容性</h2><p><img src="/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/preload%E5%85%BC%E5%AE%B9%E6%80%A7.jpg" alt="avatar"></p>
+<p>这种方式比通过 <strong>Link</strong> 方式加载资源方式更快，请求在返回还没到解析页面的时候就已经开始预加载资源了</p>
+<h2 id="preload兼容性"><a href="#preload兼容性" class="headerlink" title="preload兼容性"></a>preload兼容性</h2><p><img src="/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/preload%E5%85%BC%E5%AE%B9%E6%80%A7.jpg" alt="preload兼容性"></p>
+<h1 id="prefetch"><a href="#prefetch" class="headerlink" title="prefetch"></a>prefetch</h1><p>它的作用是告诉浏览器未来可能会使用到的某个资源，浏览器就会在闲时去加载对应的资源，若能预测到用户的行为，比如懒加载，点击到其它页面等则相当于提前预加载了需要的资源。<br>它同样可以通过 <strong>Link</strong> 标签进行创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- as属性在下面讲解 --&gt;</span><br><span class="line">&lt;link rel&#x3D;&quot;prefetch&quot; href&#x3D;&quot;&#x2F;images&#x2F;big.jpeg&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- HTTP 响应头模式 --&gt;</span><br><span class="line">Link: &lt;https:&#x2F;&#x2F;example.com&#x2F;other&#x2F;styles.css&gt;; rel&#x3D;prefetch; as&#x3D;style</span><br></pre></td></tr></table></figure>
+
+<h2 id="prefetch兼容性"><a href="#prefetch兼容性" class="headerlink" title="prefetch兼容性"></a>prefetch兼容性</h2><p><img src="/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/prefetch%E5%85%BC%E5%AE%B9%E6%80%A7.jpg" alt="prefetch兼容性"></p>
+<h1 id="link标签上的as属性与加载的优先级"><a href="#link标签上的as属性与加载的优先级" class="headerlink" title="link标签上的as属性与加载的优先级"></a>link标签上的as属性与加载的优先级</h1><p>一个资源的加载的优先级被分为五个级别，分别是:</p>
+<ul>
+<li>Highest 最高</li>
+<li>High 高</li>
+<li>Medium 中等</li>
+<li>Low 低</li>
+<li>Lowest 最低</li>
+</ul>
+<ol>
+<li>HTML/CSS 资源，其优先级是最高的</li>
+<li>font 字体资源，优先级分别为 Highest/High</li>
+<li>图片资源，如果出现在视口中，则优先级为 High，否则为 Low<br>而 script 脚本资源就比较特殊，优先级不一，脚本根据它们在文件中的位置是否异步、延迟或阻塞获得不同的优先级：</li>
+</ol>
+<ul>
+<li>网络在第一个图片资源之前阻塞的脚本在网络优先级中是 High</li>
+<li>网络在第一个图片资源之后阻塞的脚本在网络优先级中是 Medium</li>
+<li>异步/延迟/插入的脚本（无论在什么位置）在网络优先级中是 Low</li>
+</ul>
+<p>自己网站资源优先级也可以通过 Chrome 控制台 Network 一栏进行查看.</p>
+<ol>
+<li>对于使用 prefetch 获取资源，其优先级默认为最低，Lowest，可以认为当浏览器空闲的时候才会去获取的资源。</li>
+<li>而对于 preload 获取资源，可以通过 “as” 或者 “type” 属性来标识他们请求资源的优先级（比如说 preload 使用 as=”style” 属性将获得最高的优先级，即使资源不是样式文件)</li>
+<li>没有 “as” 属性的将被看作异步请求。</li>
+</ol>
+<h1 id="async-defer"><a href="#async-defer" class="headerlink" title="async/defer"></a>async/defer</h1><p><img src="/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/async&defer.png" alt="async&amp;defer"></p>
+<blockquote>
+<p>async与defer是针对 <strong>script</strong> 标签而言的,他是 <strong>script</strong> 标签上的html属性</p>
+</blockquote>
+<p><strong>async</strong>: 对于普通脚本，如果存在 async 属性，那么普通脚本会被并行请求，并尽快解析和执行。</p>
+<p><strong>defer</strong>: 这个布尔属性被设定用来通知浏览器该脚本将在文档完成解析后，触发 <strong>DOMContentLoaded</strong> 事件前执行。有 defer 属性的脚本会阻止 <strong>DOMContentLoaded</strong> 事件，直到脚本被加载并且解析完成</p>
+<blockquote>
+<p>使用 <strong>async/defer</strong> 属性在加载脚本的时候不阻塞 <strong>HTML</strong> 的解析，<strong>defer</strong> 加载脚本执行会在所有元素解析完成，<strong>DOMContentLoaded</strong> 事件触发之前完成执行。它的用途其实跟 <strong>preload</strong> 十分相似。你可以使用 <strong>defer</strong> 加载脚本在 <strong>head</strong> 末尾，这比将脚本放在 <strong>body</strong> 底部效果来的更好.</p>
+</blockquote>
+<ol>
+<li>它相比于 preload 加载的优势在于浏览器兼容性好，从 caniuse 上看基本上所有浏览器都支持，覆盖率达到 93%，</li>
+<li>不足之处在于：defer 只作用于脚本文件，对于样式、图片等资源就无能为力了，并且 defer 加载的资源是要执行的，而 preload 只下载资源并不执行，待真正使用到才会执行文件。</li>
+<li>对于页面上主/首屏脚本，可以直接使用 defer 加载，而对于非首屏脚本/其它资源，可以采用 preload/prefeth 来进行加载</li>
+</ol>
+<h1 id="实际使用案例"><a href="#实际使用案例" class="headerlink" title="实际使用案例"></a>实际使用案例</h1><ol>
+<li>提前加载字体文件。由于字体文件必须等到 <strong>CSSOM</strong> 构建完成并且作用到页面元素了才会开始加载，会导致页面字体样式闪动。所以要用 <strong>preload</strong> 显式告诉浏览器提前加载。假如字体文件在 <strong>CSS</strong> 生效之前下载完成，则可以完全消灭页面闪动效果。</li>
+<li>使用 <strong>preload</strong> 预加载第二屏的内容，在网页开发中，对于非首屏部分采用懒加载是我们页面常用的优化手段，所以我们在页面 onload 之后可以通过 <strong>preload</strong> 来加载次屏所需要的资源，在用户浏览完首屏内容滚动时能够更快地看到次屏的内容。</li>
+<li>在页面加载完成之后，可以分析页面上所有的链接，判断用户可能会点击的页面，分析提取下一跳页面上所有的资源使用 <strong>prefetch</strong> 进行加载(这里不使用 <strong>preload</strong>，因为不一定会点击)，浏览器会在空闲地时候进行加载，当用户点击链接命中了缓存，这可以有效地提升下一页面的首屏渲染时间。</li>
+<li>对于商品列表页面，在用户鼠标停留在某个商品的时候，可以去分析商品详情页所需要的资源并提前开启 <strong>preload</strong> 加载，跟第 3 点类似，都是用来预测用户的行为并且做出一些预加载的手段，区别在于当用户停留在商品上时，点击命中率更高，<strong>preload</strong> 可以立即加载资源，有效提升缓存命中率。</li>
+</ol>
+<p>参考链接:</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/48521680" target="_blank" rel="noopener">使用 Preload/Prefetch 优化你的应用</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/orphaned/Web/HTML/Preloading_content" target="_blank" rel="noopener">通过rel=”preload”进行内容预加载</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Link_prefetching_FAQ#what_are_the_prefetching_hints.3f" target="_blank" rel="noopener">什么是链接预取</a></li>
+</ul>
 
       
     </div>
@@ -654,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preload与prefetch"><span class="nav-number">1.</span> <span class="nav-text">preload与prefetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preload兼容性"><span class="nav-number">2.</span> <span class="nav-text">preload兼容性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#preload"><span class="nav-number">1.</span> <span class="nav-text">preload</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#preload兼容性"><span class="nav-number">1.1.</span> <span class="nav-text">preload兼容性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#prefetch"><span class="nav-number">2.</span> <span class="nav-text">prefetch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#prefetch兼容性"><span class="nav-number">2.1.</span> <span class="nav-text">prefetch兼容性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#link标签上的as属性与加载的优先级"><span class="nav-number">3.</span> <span class="nav-text">link标签上的as属性与加载的优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#async-defer"><span class="nav-number">4.</span> <span class="nav-text">async&#x2F;defer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实际使用案例"><span class="nav-number">5.</span> <span class="nav-text">实际使用案例</span></a></li></ol></div>
             
 
           </div>
@@ -688,7 +745,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">14.3k</span>
+    <span title="Site words total count">15.7k</span>
   
 </div>
 
