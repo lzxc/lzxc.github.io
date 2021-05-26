@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/prefetch%E5%85%BC%E5%AE%B9%E6%80%A7.jpg">
 <meta property="og:image" content="http://yoursite.com/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/async&defer.png">
 <meta property="article:published_time" content="2021-05-26T03:38:14.000Z">
-<meta property="article:modified_time" content="2021-05-26T07:56:52.710Z">
+<meta property="article:modified_time" content="2021-05-26T07:59:56.882Z">
 <meta property="article:author" content="Lzxc">
 <meta property="article:tag" content="性能优化">
 <meta name="twitter:card" content="summary">
@@ -490,9 +490,9 @@
 <p>使用 <strong>async/defer</strong> 属性在加载脚本的时候不阻塞 <strong>HTML</strong> 的解析，<strong>defer</strong> 加载脚本执行会在所有元素解析完成，<strong>DOMContentLoaded</strong> 事件触发之前完成执行。它的用途其实跟 <strong>preload</strong> 十分相似。你可以使用 <strong>defer</strong> 加载脚本在 <strong>head</strong> 末尾，这比将脚本放在 <strong>body</strong> 底部效果来的更好.</p>
 </blockquote>
 <ol>
-<li>它相比于 preload 加载的优势在于浏览器兼容性好，从 caniuse 上看基本上所有浏览器都支持，覆盖率达到 93%，</li>
-<li>不足之处在于：defer 只作用于脚本文件，对于样式、图片等资源就无能为力了，并且 defer 加载的资源是要执行的，而 preload 只下载资源并不执行，待真正使用到才会执行文件。</li>
-<li>对于页面上主/首屏脚本，可以直接使用 defer 加载，而对于非首屏脚本/其它资源，可以采用 preload/prefeth 来进行加载</li>
+<li>它相比于 <strong>preload</strong> 加载的优势在于浏览器兼容性好，从 caniuse 上看基本上所有浏览器都支持，覆盖率达到 93%，</li>
+<li>不足之处在于：<strong>defer</strong> 只作用于脚本文件，对于样式、图片等资源就无能为力了，并且 <strong>defer</strong> 加载的资源是要执行的，而 <strong>preload</strong> 只下载资源并不执行，待真正使用到才会执行文件。</li>
+<li>对于页面上主/首屏脚本，可以直接使用 <strong>defer</strong> 加载，而对于非首屏脚本/其它资源，可以采用 <strong>preload/prefeth</strong> 来进行加载</li>
 </ol>
 <h1 id="实际使用案例"><a href="#实际使用案例" class="headerlink" title="实际使用案例"></a>实际使用案例</h1><ol>
 <li>提前加载字体文件。由于字体文件必须等到 <strong>CSSOM</strong> 构建完成并且作用到页面元素了才会开始加载，会导致页面字体样式闪动。所以要用 <strong>preload</strong> 显式告诉浏览器提前加载。假如字体文件在 <strong>CSS</strong> 生效之前下载完成，则可以完全消灭页面闪动效果。</li>
