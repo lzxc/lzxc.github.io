@@ -702,4 +702,25 @@
         <tag>浏览器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>前端性能优化-preload、prefetch和defer、async</title>
+    <url>/2021/05/26/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-preload%E3%80%81prefetch%E5%92%8Cdefer%E3%80%81async/</url>
+    <content><![CDATA[<p><img src="/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/preload&prefetch.png" alt="avatar"></p>
+<blockquote>
+<p>前端性能优化-preload、prefetch和defer、async</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="preload与prefetch"><a href="#preload与prefetch" class="headerlink" title="preload与prefetch"></a>preload与prefetch</h2><p>表示用户十分有可能需要在当前浏览中加载目标资源，所以浏览器必须预先获取和缓存对应资源且更不易阻塞页面的初步渲染进而提升性能<br>它可以通过 Link 标签进行创建：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; as属性在下面讲解</span><br><span class="line">&lt;link rel&#x3D;&quot;preload&quot; href&#x3D;&quot;&#x2F;path&#x2F;to&#x2F;style.css&quot; as&#x3D;&quot;style&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="preload兼容性"><a href="#preload兼容性" class="headerlink" title="preload兼容性"></a>preload兼容性</h2><p><img src="/images/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/preload%E5%85%BC%E5%AE%B9%E6%80%A7.jpg" alt="avatar"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
 </search>
