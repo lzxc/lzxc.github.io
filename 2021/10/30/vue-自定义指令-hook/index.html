@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="Lzxc&#39;s Blog">
 <meta property="og:image" content="http://yoursite.com/images/vue/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4.png">
 <meta property="article:published_time" content="2021-10-30T03:46:26.000Z">
-<meta property="article:modified_time" content="2021-10-30T04:46:53.928Z">
+<meta property="article:modified_time" content="2021-10-30T05:02:18.279Z">
 <meta property="article:author" content="Lzxc">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  737
+                  687
                 </span>
               
 
@@ -442,7 +442,7 @@
 <blockquote>
 <p><strong>一个异步校验表单内容的自定义指令+hook</strong></p>
 </blockquote>
-<h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><h3 id="前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程"><a href="#前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程" class="headerlink" title="前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程"></a>前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程</h3><h3 id="因为项目中表单较多，rules配置一般通过单独配置当前页或通过通用函数导出，所以考虑封装通用自定义指令binding到所需vnode即可"><a href="#因为项目中表单较多，rules配置一般通过单独配置当前页或通过通用函数导出，所以考虑封装通用自定义指令binding到所需vnode即可" class="headerlink" title="因为项目中表单较多，rules配置一般通过单独配置当前页或通过通用函数导出，所以考虑封装通用自定义指令binding到所需vnode即可"></a>因为项目中表单较多，rules配置一般通过单独配置当前页或通过通用函数导出，所以考虑封装通用自定义指令binding到所需vnode即可</h3><h2 id="directive"><a href="#directive" class="headerlink" title="directive"></a>directive</h2><p>先放上vue官方文档对自定义指令地址: <a href="https://cn.vuejs.org/v2/guide/custom-directive.html" target="_blank" rel="noopener">地址</a></p>
+<h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><h3 id="前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程"><a href="#前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程" class="headerlink" title="前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程"></a>前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程</h3><h2 id="directive"><a href="#directive" class="headerlink" title="directive"></a>directive</h2><p>先放上vue官方文档对自定义指令地址: <a href="https://cn.vuejs.org/v2/guide/custom-directive.html" target="_blank" rel="noopener">地址</a></p>
 <p>可以看到 <strong>bind</strong> 与 <strong>update</strong> 生命周期钩子为这次功能所要用到的，在vnode绑定当前指令及更新时<br>在官方文档描述中，指令生命钩子的第三个参数也就是: <br/></p>
 <ul>
 <li>vnode：Vue 编译生成的虚拟节点。移步 <a href="https://cn.vuejs.org/v2/api/#VNode-%E6%8E%A5%E5%8F%A3" target="_blank" rel="noopener">VNode API</a> 来了解更多详情</li>
@@ -662,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开头"><span class="nav-number">1.</span> <span class="nav-text">开头</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程"><span class="nav-number">1.1.</span> <span class="nav-text">前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#因为项目中表单较多，rules配置一般通过单独配置当前页或通过通用函数导出，所以考虑封装通用自定义指令binding到所需vnode即可"><span class="nav-number">1.2.</span> <span class="nav-text">因为项目中表单较多，rules配置一般通过单独配置当前页或通过通用函数导出，所以考虑封装通用自定义指令binding到所需vnode即可</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#directive"><span class="nav-number">2.</span> <span class="nav-text">directive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vnode"><span class="nav-number">3.</span> <span class="nav-text">vnode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接上代码"><span class="nav-number">4.</span> <span class="nav-text">直接上代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开头"><span class="nav-number">1.</span> <span class="nav-text">开头</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程"><span class="nav-number">1.1.</span> <span class="nav-text">前段时间遇到需要给表单rules添加异步校验敏感词需求，遂记录下实现过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#directive"><span class="nav-number">2.</span> <span class="nav-text">directive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vnode"><span class="nav-number">3.</span> <span class="nav-text">vnode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接上代码"><span class="nav-number">4.</span> <span class="nav-text">直接上代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>
