@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="什么是LRU  LRU 缓存淘汰算法是一种常用缓存策略, LRU 全称是 Least Recently Used, 用于管理缓存中的数据。 工作原理：  【初始化】: 初始化一定 “容量” 的 [缓存管道], 当缓存溢出需要将最底部的数据移除 【访问数据】: 每次访问 (读或写) 缓存中的数据时, 将数据移到数据最顶部 (起始位) 或更新数据位置 【移除老旧数据】: 当缓存达到容量上限时, 需">
+<meta name="description" content="什么是LRU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单实现LRU缓存">
 <meta property="og:url" content="http://yoursite.com/2024/02/27/%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0LRU%E7%BC%93%E5%AD%98/index.html">
 <meta property="og:site_name" content="Lzxc&#39;s Blog">
-<meta property="og:description" content="什么是LRU  LRU 缓存淘汰算法是一种常用缓存策略, LRU 全称是 Least Recently Used, 用于管理缓存中的数据。 工作原理：  【初始化】: 初始化一定 “容量” 的 [缓存管道], 当缓存溢出需要将最底部的数据移除 【访问数据】: 每次访问 (读或写) 缓存中的数据时, 将数据移到数据最顶部 (起始位) 或更新数据位置 【移除老旧数据】: 当缓存达到容量上限时, 需">
+<meta property="og:description" content="什么是LRU">
 <meta property="og:image" content="http://yoursite.com/images/javascript/lru%E7%AE%97%E6%B3%95.jpg">
 <meta property="og:image" content="http://yoursite.com/images/javascript/map.keys.jpg">
 <meta property="og:image" content="http://yoursite.com/images/javascript/map.next.png">
 <meta property="article:published_time" content="2024-02-27T15:26:24.000Z">
-<meta property="article:modified_time" content="2024-02-28T05:01:38.420Z">
+<meta property="article:modified_time" content="2024-02-28T05:09:04.450Z">
 <meta property="article:author" content="Lzxc">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -444,6 +444,7 @@
 <blockquote>
 <p>什么是LRU</p>
 </blockquote>
+<a id="more"></a>
 <p>LRU 缓存淘汰算法是一种常用缓存策略, LRU 全称是 Least Recently Used, 用于管理缓存中的数据。</p>
 <p>工作原理：</p>
 <ul>
